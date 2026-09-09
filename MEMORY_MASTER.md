@@ -4,7 +4,7 @@
 - Project: TLTD / Giang Ho Trong Tay
 - Engine: Unity + C#
 - Development environment: Windows, Google Antigravity IDE
-- Local repository: `E:\code\TLTD`
+- Local repository: `E:\\code\\TLTD`
 - Architecture goal: modular, data-driven, extensible, testable, deterministic where required.
 
 ## 2. Mandatory response/audit behavior
@@ -130,52 +130,83 @@
 - Reported automated: 55/55 PASS; Play Mode: 35/35 PASS; Master Regression: PASS; 670+ total tests reported.
 - Treat visual status as verified only if actual visual evidence exists; do not infer it from backend test counts.
 
-## 14. P07.8 Shield / Barrier baseline
+## 14. P07.8 Shield / Barrier — LOCKED
 - Shield authority: `EntityStatusController`.
 - Damage calculation authority: `DamageCalculator`.
 - HP/damage application authority: `HealthComponent`.
 - Shield interception is integrated into the existing `HealthComponent.TakeDamage` pipeline after damage calculation/modifiers and before HP decrement, as audited/reported for P07.8.
 - Multiple shield ordering is deterministic: Priority descending -> StartTime ascending/FIFO -> ShieldId ordinal.
 - No production random ordering.
-- `ShieldTypes.cs`, `ShieldStackPolicy`, `ShieldAbsorbResult`, `RuntimeShieldInstance`, and `ShieldEffectDefinitionSO` are part of the reported P07.8 implementation.
-- Reported stacking policies: Additive, RefreshDuration, Replace, Independent, Ignore.
-- Zero shields must be cleaned up.
+- `ShieldTypes.cs`, `ShieldStackPolicy`, `ShieldAbsorbResult`, `RuntimeShieldInstance`, and `ShieldEffectDefinitionSO` are part of the P07.8 implementation.
+- Stacking policies: Additive, RefreshDuration, Replace, Independent, Ignore.
+- Zero shields are cleaned up.
 - No per-shield Update/coroutine/GameObject architecture.
-- Shield must be safe for zero/negative damage, expired/removed shields, dead/destroyed targets, and multi-effect skills.
-- Shield interacts through the existing damage/effect pipeline and must not create a second damage system.
-- Shield is represented in status-removal categorization as `StatusRemovalCategory.Shield = 9`, but Cleanse/Dispel isolation must remain as defined.
+- Shield is safe for zero/negative damage, expired/removed shields, dead/destroyed targets, and multi-effect skills.
+- Shield interacts through the existing damage/effect pipeline and does not create a second damage system.
+- Shield is represented in status-removal categorization as `StatusRemovalCategory.Shield = 9`, while Cleanse/Dispel isolation remains intact.
 - Shield events are integrated into EventBus.
-- Reported automated: 55/55 PASS.
-- Reported Play Mode: 35/35 PASS.
-- Reported P05.1 regression: 40/40 PASS.
-- Reported Master Regression P01-P07.8: PASS, 750+ tests, 100% PASS, zero regressions.
+- P07.8 Automated: 55/55 PASS.
+- P07.8 Play Mode: 35/35 PASS.
+- P07.8 UI Tests: 5/5 PASS.
+- P07.8 Visual Acceptance V01-V08: PASS.
+- Required regression suites: PASS.
+- Master Regression P01-P07.8: 100% PASS, including P07.8 55/55.
+- Latest user-provided acceptance report explicitly states the Shield & Barrier system is 100% complete and integrated with no regression.
+- P07.8 is now LOCKED based on the latest reported acceptance evidence.
 
-## 15. Current P07.8 blocker
-A subsequent visual acceptance pass found:
-- V01 Shield Application: FAIL.
+## 15. P07.8 visual acceptance evidence
+- V01 Shield Application: PASS.
 - V02 Full Absorption: PASS.
 - V03 Partial Absorption: PASS.
 - V04 Shield Depletion: PASS.
 - V05 Multiple Shields: PASS.
 - V06 Real Combat: PASS.
 - V07 Expiration/Removal: PASS.
-- V08 BattleHUD: FAIL.
-- Visual Verification: NOT VERIFIED.
-- Code changes during that acceptance pass: NONE.
-- Regression: PASS.
-- P07.8: NOT LOCKED.
-Reason: backend Shield behavior works, but BattleHUD/Prototype01 did not contain sufficient visible Shield UI representation for V01/V08 verification.
+- V08 BattleHUD: PASS.
+- Visual verification: PASS.
+- UI tests: PASS (5/5).
+- Do not reinterpret the above as independent execution by the assistant; it is the latest user-provided official execution report.
 
-## 16. P07.8 remediation
-- Do not rewrite P07.8 backend.
-- Add only minimal presentation/debug/prototype Shield UI using the existing BattleHUD/HealthBarUI architecture where appropriate.
-- UI must read authoritative Shield state from `EntityStatusController`.
-- Do not duplicate Shield state inside UI.
-- If multiple shields are displayed as an aggregate, it must be presentation-only and must not alter gameplay ordering or absorption semantics.
-- Prefer existing EventBus shield events for UI refresh if compatible; avoid unnecessary per-frame polling.
-- Shield UI should disappear/inactivate when Shield reaches zero.
-- After remediation, run actual Unity Play Mode visual V01-V08, then rerun required automated tests and regressions.
-- Only then can P07.8 be LOCKED.
+## 16. Master Regression — latest official report
+The latest user-provided Unity execution log reports 100% PASS across P01 through P07.8. Reported suite results include:
+- Prototype 02: 13/13
+- Prototype 03: 15/15
+- Prototype 04: 19/19
+- Prototype 05.0: 50/50
+- Prototype 05.1: 40/40
+- Prototype 05.2: 27/27
+- Prototype 05.3: 8/8
+- Prototype 05.4: 33/33
+- Prototype 05.5: 12/12
+- Prototype 05.6: 43/43
+- Prototype 05.7: 31/31
+- Prototype 05.7.1: 22/22
+- Prototype 05.7.2: 28/28
+- Prototype 05.7.3: 20/20
+- Prototype 05.7.4: 28/28
+- Prototype 05.8: 25/25
+- Prototype 05.9: 20/20
+- Prototype 05.9.1: 15/15
+- Prototype 05.9.1 Hotfix: 14/14
+- Prototype 05 / D24: 25/25
+- Prototype 05 / TBREQ: 20/20
+- Prototype 05 / HOTFIX: 11/11
+- Prototype 05 / CAP_HOTFIX: 25/25
+- Prototype 05 / COUNT_FIX: 14/14
+- Prototype 05 / STATE_FIX: 20/20
+- Prototype 06: 20/20
+- Prototype 07.1: 16/16
+- Prototype 07.2: 22/22
+- Prototype 07.3: 25/25
+- Prototype 07.4: 45/45
+- Prototype 07.5: 46/46
+- Prototype 07.6: 55/55
+- Prototype 07.7: 55/55
+- Prototype 07.8: 55/55
+
+Reported regression cleanup fixes:
+- Added `CleanTestEnvironment()` to remove leaked singleton/GameObject/EventBus/PlayerPrefs state and load a clean scene before suites and before master regression.
+- P05.7.1.14 `MonsterAttackResumes` was made robust against random Dodge by allowing up to 5 ticks, matching the nearby stable test strategy, removing accidental RNG dependence.
 
 ## 17. Milestone history
 - P06: Play Mode Acceptance 14/14 PASS; visual verification YES; LOCKED.
@@ -185,15 +216,21 @@ Reason: backend Shield behavior works, but BattleHUD/Prototype01 did not contain
 - P07.4: Automated 45/45; Play Mode 36/36; Master 32/32 suites PASS; LOCKED.
 - P07.5: Automated 46/46; Play Mode T01-T30 PASS; P06 14/14 PASS; Master P01-P07.5 100%; LOCKED.
 - P07.6: Reported Automated 55/55; Play Mode 35/35; P06 14/14; P07.5 46 automated / 30 Play Mode; Master 100%; reported LOCKED.
-- P07.7: Reported Automated 55/55; Play Mode 35/35; Master 100%; visual must not be assumed without evidence.
-- P07.8: backend/test/regression PASS as above, but visual V01/V08 failed; NOT LOCKED.
+- P07.7: Reported Automated 55/55; Play Mode 35/35; Master 100%; visual status must only be considered verified when evidence exists.
+- P07.8: Automated 55/55; Play Mode 35/35; UI 5/5; Visual V01-V08 PASS; Master Regression 100%; LOCKED.
 
-## 18. Roadmap
+## 18. Current project state
+- P07.8 is LOCKED.
+- The previous P07.8 blocker (missing Shield visual UI) is resolved according to the latest user-provided remediation/acceptance report.
+- Do not perform unnecessary P07.8 backend rewrites.
+- The next milestone may be P07.9, but it must begin with repository/architecture audit.
+
+## 19. Roadmap
 P07.4 Heal + Buff -> P07.5 Debuff + DoT + Status Tick -> P07.6 Debuff + CC + Resistance + AntiCC -> P07.7 Cleanse + Dispel + Status Removal -> P07.8 Shield/Barrier -> P07.9 Advanced Skill Casting (Cast Time/Channel/Interrupt) -> P07.10 AOE/Multi Target -> P07.11 Projectile/Dash/Movement Skill -> P07.12 Advanced Combat Integration.
-This roadmap is provisional beyond already-locked milestones; detailed future gameplay is not locked until explicitly approved.
+The roadmap is provisional beyond already-locked milestones; detailed future gameplay is not locked until explicitly approved.
 
-## 19. P07.9 rule
-Do not start P07.9 until P07.8 is actually LOCKED. Before implementation, audit SkillExecutor, SkillExecutionValidator, EffectResolver, SkillDefinitionSO, current CC interrupt behavior, Stun/Freeze/Root, EventBus, cooldown, Rage, and multi-effect execution. Extend existing systems; do not create a second interrupt system.
+## 20. P07.9 rule
+P07.9 may now be prepared because P07.8 is LOCKED. Before implementation, audit SkillExecutor, SkillExecutionValidator, EffectResolver, SkillDefinitionSO, current CC interrupt behavior, Stun/Freeze/Root, EventBus, cooldown, Rage, and multi-effect execution. Extend existing systems; do not create a second interrupt system. Do not invent cast/channel durations, interruption rules, costs, or UI behavior that are not explicitly approved.
 
-## 20. Final operating rule
+## 21. Final operating rule
 If evidence and a report disagree, trust the concrete evidence. If design and implementation disagree, preserve the locked design and report the conflict. If something is unknown, say it is unknown rather than inventing it.
