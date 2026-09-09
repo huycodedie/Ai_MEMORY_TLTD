@@ -37,9 +37,149 @@ This file is the canonical recovery record for the D1-D23 design decisions expli
 - Chi tiết cast/channel/interrupt nâng cao chỉ được bổ sung khi có quyết định tương ứng; không tự suy diễn thêm.
 
 ## D6-D19
-- Chưa có nguyên văn trong nguồn được cung cấp ở lần khôi phục này.
-- KHÔNG được AI tự tái tạo hoặc suy đoán.
-- Khi người dùng cung cấp lại nguồn D6-D19, phải bổ sung đúng nguồn.
+
+### D19 — IDLE / BÁNH BAO / OFFLINE PROGRESSION — FINAL
+
+#### D19.1 — Bánh bao chỉ áp dụng cho quái thường
+- Bánh bao có tiêu hao trong Normal Monster Battle.
+- Boss Battle không tiêu hao bánh bao.
+- Khi Bun = 0: Normal Battle dừng; Boss Battle vẫn hoạt động bình thường.
+- Boss không phụ thuộc vào số bánh bao còn lại.
+
+#### D19.2 — 1 bánh bao = 1 Hero Action
+- 1 bánh bao = 1 lần sử dụng hành động chiến đấu của Hero.
+- Bao gồm Basic Attack, Skill 1, Skill 2, Skill 3, Skill 4 và Ultimate.
+- Mỗi lần Hero Action tiêu hao đúng 1 bánh bao.
+- Khi Bun = 0 trong Normal Battle: không Basic Attack, không Skill, không Ultimate.
+- Cooldown và Rage vẫn có thể tồn tại về mặt trạng thái hệ thống, nhưng Action không được thực thi khi Normal Battle hết bánh bao.
+
+#### D19.3 — Companion và bánh bao
+- Companion Action không tiêu bánh bao.
+- Companion đánh không tiêu bánh bao.
+- Companion dùng kỹ năng không tiêu bánh bao.
+- Tuy nhiên Companion không được tiếp tục chiến đấu vô hạn khi Hero đã làm Normal Battle chuyển sang trạng thái dừng.
+
+#### D19.4 — Hero khi hết bánh bao
+- Normal Battle với Bun > 0: Combat hoạt động.
+- Bun = 0: Hero STOP ACTION, STOP ATTACK, STOP SKILL, STOP ULTIMATE.
+- Normal combat cũng dừng.
+- Có thể đưa Hero về Rest Area thông qua UX/UI, nhưng Rest Area không được hard-code vào Combat Engine.
+- Combat Engine nên phát trạng thái `BattleState.OUT_OF_RESOURCE`; UI/Scene Manager quyết định cách hiển thị/chuyển trạng thái.
+
+#### D19.5 — Khi bánh bao hồi lại
+- Khi Bun hồi và có Bun mới, Hero tự động Resume Normal Battle.
+- Không yêu cầu người chơi bấm Start lại.
+
+#### D19.6 — Tốc độ hồi bánh bao
+- Bun Regen = 3 bánh bao/phút.
+- Tương đương 1 bánh bao/20 giây.
+- Engine nên dùng cấu hình regeneration tick tương đương `BUN_REGEN_INTERVAL = 20s` và `BUN_REGEN_AMOUNT = 1`, thay vì hard-code một chu kỳ +3/phút để dễ mở rộng.
+- Tốc độ hồi có thể được mở rộng bởi các hệ thống như VIP, Player Level, Buff, Item, Event, Skill nếu sau này có quyết định tương ứng.
+
+#### D19.7 — Max bánh bao
+- Max Bun có tồn tại nhưng giá trị cụ thể chưa được xác định.
+- Không được tự đặt giá trị cố định như 100 hoặc 200.
+- `maxBun` phải configurable/data-driven.
+
+#### D19.8 — Normal Battle nhiều quái và Area Skill
+- Normal Battle có thể xuất hiện nhiều quái cùng lúc.
+- Basic Attack có thể đánh một mục tiêu hợp lệ.
+- Area Skill có thể đánh nhiều mục tiêu trong phạm vi.
+- 1 Skill Cast = 1 bánh bao, không phải 1 Target Hit = 1 bánh bao.
+- Ví dụ một Area Skill đánh nhiều quái vẫn chỉ tiêu 1 bánh bao.
+
+#### D19.9 — Offline Progression
+- Game có Offline Progress.
+- Khi đóng game: ghi timestamp.
+- Khi mở lại: tính elapsed time, áp dụng giới hạn Offline Time, mô phỏng Normal Progress và trả Reward.
+- Offline không phải một Combat Scene chạy ngầm.
+
+#### D19.10 — Offline có giới hạn
+- Offline Duration có giới hạn.
+- `effectiveOfflineTime = min(actualOfflineTime, maxOfflineTime)`.
+- `maxOfflineTime` phải configurable/data-driven.
+- Giá trị cụ thể của Max Offline Time chưa được xác định.
+- Có thể mở rộng giới hạn bởi Player Level, VIP, Research, Talent, Equipment, Achievement, Event hoặc hệ thống tương lai khi có quyết định tương ứng.
+
+#### D19.11 — Offline không tự đánh Boss
+- Offline Simulation chỉ tiếp tục mô phỏng Normal Battle.
+- Khi Progress đạt 100%: dừng tại Boss Gate.
+- Không tự động chiến Boss khi offline.
+- Người chơi phải mở game và bấm `Khiêu chiến Boss` để bắt đầu Boss Battle.
+
+#### D19.12 — Offline khi Progress chưa đạt 100%
+- Nếu đóng game khi Progress < 100%, Offline Simulation tiếp tục mô phỏng Normal Battle.
+- Khi đạt 100% thì dừng tại Boss Gate.
+- Không vượt qua Boss Gate trong Offline.
+
+#### D19.13 — Offline không vượt qua Boss Gate
+- Normal Progress → 100% → Boss Gate → STOP.
+- Offline Simulation không được tự đánh Boss và không được tự tăng Stage sau Boss Gate.
+- Người chơi phải chủ động khiêu chiến Boss.
+
+#### D19.14 — Nếu đang 100% rồi đóng game
+- Nếu Stage N đang ở Progress 100% khi người chơi đóng game, sau Offline vẫn là Stage N / Progress 100%.
+- Không tự chuyển thành Stage N+1.
+
+#### D19.15 — Offline Simulation không chạy Combat Engine từng frame
+- Không chạy Combat Engine realtime trong suốt thời gian Offline.
+- Offline dùng mô hình tính toán/simulation trực tiếp để tạo kết quả.
+- Kết quả nên có cấu trúc tương đương `OfflineSimulationResult` gồm các dữ liệu như elapsedTime, simulatedMonsters, progressGained, goldGained, expGained, bunRegenerated, reachedBossGate.
+- Không được biến Offline thành một Combat Scene chạy ngầm hoặc hàng triệu combat tick.
+
+#### D19.16 — Online và Offline phải cho kết quả hợp lý
+- Online: Real-time Combat, Animation, Projectile, AI, Damage, Skills.
+- Offline: Simulation, không cần Animation/Projectile/AI/Render realtime.
+- Hai nhánh cùng hội tụ về Progress/Reward.
+- Offline không phải một Combat Scene chạy ngầm.
+
+#### D19.17 — Boss Resource Loop
+- Boss Battle độc lập với Bun.
+- Boss có Basic Attack, Skill, Rage và Ultimate theo Combat System.
+- Bun = 0 không làm Boss Battle dừng.
+
+#### D19.18 — Normal Battle State Machine
+- Chuẩn hóa Normal Battle theo các trạng thái: `ACTIVE`, `OUT_OF_BUN`, `BOSS_GATE`, `PAUSED`.
+- `ACTIVE`: Bun > 0; Hero + Companion + Monsters hoạt động.
+- `OUT_OF_BUN`: Bun = 0; Hero ngừng hành động và Normal combat dừng.
+- Khi Bun > 0 trở lại: `OUT_OF_BUN` → `ACTIVE`, Hero tự động Resume.
+- `BOSS_GATE`: Progress = 100%; Normal progression dừng và hiển thị hành động `Khiêu chiến Boss`.
+
+#### D19.19 — Offline Bun Economy
+- Online: Bun giới hạn Hero Action.
+- Offline: Bun không được dùng làm giới hạn số quái mô phỏng.
+- Offline Bun vẫn hồi theo thời gian.
+- Bun khi mở game = Bun hiện tại + lượng Bun hồi trong Offline, sau đó áp dụng Max Bun.
+- Nếu lượng hồi vượt Max Bun thì phần vượt Max Bun không được giữ.
+- Ví dụ: Bun 20, Offline 60 phút, regen 3/phút → hồi 180; nếu Max Bun = 100 thì Bun cuối = 100.
+- Bun còn dư khi Normal Progress đạt 100% được giữ lại.
+
+#### D19.20 — Toàn bộ Stage Loop
+- Stage N → Normal Battle → Multi Monsters → Hero/Companion → Hero Action consume Bun → Kill Monsters → Progress %.
+- Progress < 100% → Continue Normal Battle.
+- Progress = 100% → Boss Gate → người chơi bấm `Khiêu chiến Boss` → Boss Battle.
+- Boss WIN → Rewards → Stage N+1 → Progress 0/50 (giá trị ví dụ trong nguồn, không coi là universal nếu chưa có quyết định khác).
+- Boss LOSE → quay về Normal Screen.
+
+#### D19.21 — Chốt Bước 19
+| Thành phần | Quy tắc |
+|---|---|
+| Hero Action | -1 bánh bao |
+| Companion Action | Không tiêu bánh bao |
+| Normal Battle | Cần bánh bao |
+| Boss Battle | Không cần bánh bao |
+| Bun Regen | 3/phút |
+| Bun = 0 | Normal Combat dừng |
+| Bun hồi lại | Hero tự động Resume |
+| Offline | Có |
+| Offline dùng Bun để giới hạn | Không |
+| Offline Bun Regen | Có |
+| Offline đạt 100% | Dừng tại Boss Gate |
+| Offline tự đánh Boss | Không |
+| Bun còn dư khi đạt 100% | Giữ lại |
+| Bun Offline | Cộng lượng hồi trong thời gian Offline |
+| Max Bun | Có, giá trị chưa xác định |
+| Max Offline Time | Có, giá trị chưa xác định |
 
 ## D20 — Tiến trình Ải, Quái thường & Treo máy
 
@@ -153,7 +293,8 @@ This file is the canonical recovery record for the D1-D23 design decisions expli
 
 ## Current recovered status
 - D1-D5: RECOVERED / LOCKED.
-- D6-D19: MISSING ORIGINAL SOURCE — DO NOT INVENT.
+- D6-D18: MISSING ORIGINAL SOURCE — DO NOT INVENT.
+- D19: RECOVERED / LOCKED — FINAL.
 - D20: RECOVERED / LOCKED.
 - D21: RECOVERED / LOCKED, with D21-6 historical answer explicitly superseded by later Level Gate rule.
 - D22: MISSING ORIGINAL SOURCE — DO NOT INVENT.
