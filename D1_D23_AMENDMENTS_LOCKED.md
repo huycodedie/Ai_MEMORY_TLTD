@@ -51,11 +51,11 @@ The exact roll/distribution inside that allowed range is not separately specifie
 
 Important: this supersedes the older D17/D16 recovery wording that treated Chest Level as directly determining the Item Level range. Chest/Drop Level determines loot quality/rarity; Hero Level determines the Item Level basis, subject to the +/-5 constraint.
 
-## A4 — Item quality/rarity is determined by Chest/Drop Level
+## A4 — Item quality/rarity is unlocked progressively by Chest/Drop Level
 
-Item quality (Phẩm chất) is determined by the unified Chest/Drop Level through data-driven rarity probabilities.
+Item quality (Phẩm chất) is determined by the unified Chest/Drop Level through data-driven rarity probabilities **and availability/unlock rules**.
 
-The supplied reference screenshot shows 9 quality tiers:
+The supplied reference screenshot shows the following quality tiers at the displayed Cấp Rơi 2 and Cấp Rơi 3:
 
 1. `Thô Sơ`
 2. `Thường`
@@ -67,7 +67,33 @@ The supplied reference screenshot shows 9 quality tiers:
 8. `Tinh Khiết`
 9. `Tối Thượng`
 
-Therefore the earlier recovered D16 statement of **7 rarity tiers is superseded** for the current design.
+**Important correction:** these 9 rows are NOT a declaration that the game has only 9 total quality tiers. The user explicitly confirms that there are higher-quality tiers beyond what is currently available/visible at the lower Chest/Drop Levels.
+
+The correct model is:
+
+```text
+Cấp Rơi thấp
+    ↓
+Chỉ mở/hiển thị các phẩm chất đã đạt điều kiện
+    ↓
+Các phẩm chất cao hơn chưa được mở
+    ↓
+Có thể hiển thị 0% ở Cấp Rơi hiện tại
+```
+
+Therefore a `0%` shown for a high-quality tier at a low Cấp Rơi must **not** be interpreted as “this rarity does not exist”. It can mean that the Cấp Rơi hiện tại has not unlocked that quality yet.
+
+As Cấp Rơi increases:
+
+```text
+Cấp Rơi ↑
+   ↓
+Mở thêm các phẩm chất cao cấp
+   ↓
+Các phẩm chất mới có thể bắt đầu có tỷ lệ > 0%
+```
+
+The exact unlock threshold for every quality tier is **not yet specified** and must remain data-driven/configurable until explicitly decided.
 
 The screenshot also demonstrates that each Cấp Rơi can have its own probability table. Reference evidence shown in the supplied image:
 
@@ -84,6 +110,8 @@ The screenshot also demonstrates that each Cấp Rơi can have its own probabili
 | Tối Thượng | 0% | 0% |
 
 These displayed percentages are **reference/sample data from the supplied screenshot**, not a universal formula for every Cấp Rơi. The architecture must remain data-driven.
+
+The screenshot's 9 visible rows are therefore **reference evidence of currently displayed tiers**, not a hard maximum of 9 tiers.
 
 ## A5 — Equipment: 12 player-worn slots
 
@@ -227,6 +255,8 @@ However, **do not infer a supersession merely because code differs**. Only an ex
 These amendments do not authorize inventing any still-unknown values, including:
 - exact item-level roll distribution within HeroLevel +/- 5;
 - exact rarity probability tables beyond screenshot reference values;
+- exact rarity unlock thresholds;
+- exact total number of quality tiers beyond what has been explicitly established;
 - exact Chest/Drop Level cost/time progression;
 - exact affix values;
 - exact CP weights;
