@@ -4,28 +4,31 @@
 > GitHub is the long-term memory backup. Antigravity must read the LOCAL copy under `E:\code\TLTD\PROJECT_MEMORY\`, not assume it can read GitHub directly.
 
 ## 1. Purpose
-
 This folder is the local, AI-readable Design Contract for project `E:\code\TLTD`.
 
 Before implementing or modifying gameplay code, AI must read:
 
 1. `AI_RULES.md`
-2. `D1_D23_LOCKED.md`
-3. `D1_D23_AMENDMENTS_LOCKED.md`
-4. Relevant D-section documents (`D6_D8_LOCKED.md`, `D9_D11_LOCKED.md`, `D12_D14_LOCKED.md`, `D15_D16_LOCKED.md`, `D17_D18_LOCKED.md`, `D22_LOCKED.md`)
-5. Relevant P07.x locked/acceptance documents available in this memory repository
-6. Current project code and tests
+2. `CURRENT_DESIGN_AUTHORITY.md`
+3. `D1_D23_LOCKED.md`
+4. `D1_D23_AMENDMENTS_LOCKED.md`
+5. Relevant D-section documents
+6. Relevant P07.x locked/acceptance documents
+7. Current project code and tests
+8. `DESIGN_CHANGELOG.md` when a conflict, superseding decision, or design change is involved
 
 ## 2. Authority hierarchy
 
 When rules differ, use this order:
 
 1. Original user D1-D23 decisions
-2. Later explicit locked amendments
+2. Later explicit locked amendments/revisions
 3. P01+ behavior that was actually tested and explicitly accepted/locked by the user
 4. Current implementation evidence
 5. New proposal
 6. General AI assumptions
+
+`CURRENT_DESIGN_AUTHORITY.md` is the quick-reference of the current state, but it does not erase historical sources.
 
 If a later P01+ decision explicitly supersedes an older historical rule, the later decision wins.
 
@@ -47,7 +50,7 @@ If a conflict cannot be proven as superseded, STOP and report it. Do not silentl
 ### Item Level
 - Item Level is based on the Hero's current Level.
 - Constraint: `abs(ItemLevel - HeroLevel) <= 5`.
-- The exact distribution/roll inside the ±5 range is NOT locked unless another source explicitly provides it. Do not invent one.
+- Exact distribution/roll inside the ±5 range is NOT locked unless another source explicitly provides it. Do not invent one.
 
 ### Rarity / Quality
 - Cấp Rơi determines which qualities/rarities can appear and their probabilities.
@@ -71,12 +74,8 @@ If a conflict cannot be proven as superseded, STOP and report it. Do not silentl
 ### Companion combat
 - Companion uses the common Combat Resolver / common combat pipeline.
 - Do not create a separate Companion Combo/Counter engine.
-- Preserve anti-recursion rules.
-
-### Status / CC
-- P07.6+ architecture is authoritative over older historical implementation descriptions.
-- Use the shared `EntityStatusController`, `EffectResolver`, and shared status/combat pipeline.
-- Do not create duplicate Hero/Companion status authorities.
+- Companion has HP, can be attacked, can die, and respawns according to the locked respawn rule.
+- This supersedes older historical wording that described Pets/satellites as having no HP.
 
 ### Chest upgrade
 - Upgrade is one level at a time.
@@ -149,16 +148,18 @@ Do not silently alter either side.
 
 ## 8. Required workflow for every new milestone
 
-1. Read this file.
-2. Read relevant D/P locked documents.
-3. Audit current code before editing.
-4. Identify dependencies and authority ownership.
-5. Identify conflicts and unresolved TBD values.
-6. Propose implementation scope.
-7. Only then modify code.
-8. Add/extend tests.
-9. Run actual Unity/Play Mode validation where required.
-10. Update milestone evidence and memory only after acceptance.
+1. Read `AI_RULES.md`.
+2. Read `CURRENT_DESIGN_AUTHORITY.md`.
+3. Read relevant D/P locked documents.
+4. Audit current code before editing.
+5. Identify dependencies and authority ownership.
+6. Identify conflicts and unresolved TBD values.
+7. Propose implementation scope.
+8. Only then modify code.
+9. Add/extend tests.
+10. Run actual Unity/Play Mode validation where required.
+11. Update milestone evidence and memory only after acceptance.
+12. Record any superseding design decision in `DESIGN_CHANGELOG.md`.
 
 ## 9. Important current architecture principle
 
@@ -173,3 +174,16 @@ Extend existing authoritative systems. Do not duplicate:
 - event authority
 
 P07.8 is LOCKED and must not be regressed while implementing later milestones.
+
+## 10. Current standalone authority files
+
+- `D20_LOCKED.md`
+- `D21_LOCKED.md`
+- `D22_LOCKED.md`
+- `D23_LOCKED.md`
+- `P07_5_LOCKED.md`
+- `P07_6_LOCKED.md`
+- `P07_7_LOCKED.md`
+- `P07_8_LOCKED.md`
+
+These files are quick-reference locked records. If a later explicit amendment exists, follow the amendment/current authority and preserve the older record as history.
