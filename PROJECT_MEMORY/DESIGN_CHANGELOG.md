@@ -59,5 +59,16 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - Latest user-provided acceptance report states V01-V08 PASS, UI 5/5, Play Mode 35/35, Automated 55/55 and Master Regression PASS.
 - Status: P07.8 `LOCKED` based on reported acceptance evidence.
 
+### Global portrait UI shell / Công Pháp separation
+- Reference UI review established that the game is a **mobile portrait / vertical-screen game**.
+- The bottom navigation is part of the **global game shell**, not a local panel belonging to Công Pháp.
+- The global shell has **5 primary navigation positions**.
+- The **center position is the Main Hub / Main Game Frame**.
+- Individual systems replace the Main Content Area above this navigation.
+- **Công Pháp is a dedicated system screen/module** and must not return to the old generic shared-function panel structure.
+- The structural baseline is recorded in `PROJECT_MEMORY/UI_DESIGN_AUTHORITY.md`.
+- Exact labels/icons, visual styling, spacing and detailed screen layout remain open unless separately approved.
+- Status: `LOCKED — UI STRUCTURE BASELINE`.
+
 ## Future revision rule
-Every new gameplay change must record: old rule -> evidence/reason -> new rule -> status -> affected milestone/code -> tests required. Never delete historical decisions to hide a conflict.
+Every new gameplay or UI change must record: old rule -> evidence/reason -> new rule -> status -> affected milestone/code -> tests required. Never delete historical decisions to hide a conflict.
