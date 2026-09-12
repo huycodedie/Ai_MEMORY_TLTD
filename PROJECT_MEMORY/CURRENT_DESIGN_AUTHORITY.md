@@ -63,11 +63,32 @@ If a conflict cannot be proven as superseded: STOP and report it. Never guess.
 - At persisted `CurrentTime >= FinishTime`, auto-complete to the next level and enter IDLE.
 - Persist timestamps; do not rely on transient timers for authority.
 
+## UI structure baseline
+- The game is a **2D mobile portrait / vertical-screen game**.
+- The bottom navigation is a **global game shell**, not part of an individual system screen.
+- There are **5 primary global navigation positions**.
+- The **center position is the Main Hub / Main Game Frame**.
+- Major systems replace the Main Content Area above the navigation; they do not create a second navigation framework.
+- **Công Pháp is a dedicated system screen/module**, not another tab inside a generic all-purpose function panel.
+- Công Pháp may contain its own overview, category list, and detail sub-screens while retaining the global 5-position navigation shell.
+- Exact navigation labels/icons, portrait resolution, pixel layout, visual art and detailed interaction remain TBD unless separately approved.
+- Full structural rules are recorded in `PROJECT_MEMORY/UI_DESIGN_AUTHORITY.md`.
+
 ## P07.8 status
 P07.8 Shield/Barrier is LOCKED according to the latest user-provided acceptance report: Automated 55/55, Play Mode 35/35, UI 5/5, Visual V01-V08 PASS, Master Regression P01-P07.8 PASS.
 
-## Next milestone
-P07.9 may be prepared, but future behavior is **not locked** merely because the roadmap names it. First audit the existing SkillExecutor, SkillExecutionValidator, EffectResolver, SkillDefinitionSO, CC interruption behavior, cooldown, Rage, EventBus and multi-effect execution. Do not invent cast/channel durations, interruption rules, costs or UI behavior.
+## P07.9 status
+P07.9 is in active implementation/audit and is **not locked**. Approved design decisions include:
+- Stun interrupts active Cast/Channel.
+- Freeze interrupts active Cast/Channel.
+- Root does not interrupt.
+- Ordinary damage does not interrupt.
+- Rage is consumed at Cast Start; interrupted casts receive no Rage refund.
+- Interrupted before completion has no cooldown.
+- Interrupted cast does not execute deferred final effects; already-executed channel ticks remain.
+- Existing EntityStatusController remains the sole CC authority.
+- Existing Entity.InterruptCurrentAction is the integration point.
+- No second skill execution authority, global loop, coroutine, async loop, or Animator-dependent timing system.
 
 ## Implementation rule
 P01+ tested-and-accepted behavior may supersede an older historical design rule. Record the change; do not silently overwrite history.
