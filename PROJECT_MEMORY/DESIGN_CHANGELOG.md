@@ -70,5 +70,25 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - Exact labels/icons, visual styling, spacing and detailed screen layout remain open unless separately approved.
 - Status: `LOCKED — UI STRUCTURE BASELINE`.
 
+### P07.9 Advanced Skill Casting
+- Cast Time / Channel / Interrupt milestone was explicitly locked by the user after the final regression and audit.
+- Locked behavior includes Rage at Cast Start/no refund, completion-based cooldown, no normal cooldown on pre-completion interruption, movement lock while casting, Stun/Freeze interrupt, Root/ordinary damage no interrupt, and preservation of existing execution/status authorities.
+- Status: `LOCKED`.
+
+### P07.9.1 Hero Autonomous Skill Decision & Auto Combat
+- P07.9.1 was explicitly accepted/locked after audit of autonomous normal-skill decisions, data-driven priority, Auto ON/OFF behavior, Ultimate RageCost from `SkillDefinitionSO.RageCost`, Rage authority preservation, and Cast/Channel interaction.
+- Reported validation: dedicated 16/16, P07.8 55/55, P07.9 Phase5.3 36/36, P07.9 Risk04 18/18, historical Master P01-P07.8 PASS, compile 0 errors/0 warnings, runtime scenarios A-E PASS.
+- Full baseline: `PROJECT_MEMORY/P07_9_1_LOCKED.md`.
+- Status: `LOCKED` based on user-provided execution evidence.
+
+### UI-02 Runtime Combat Height / Y-axis deadlock remediation
+- Runtime investigation reproduced a permanent multi-encounter combat deadlock after Monster #1 death.
+- Root causes: legacy `BattleManager.monsterSpawnPosition` Y=-1.2 versus the active Prototype01 combat plane Y=-0.3, plus Movement using horizontal distance while Attack used full 3D `Vector3.Distance`.
+- The user-approved remediation set spawned Monster Y to -0.3, serialized the same spawn plane in `Prototype01SceneBuilder`, and aligned Attack distance with the Movement horizontal-plane model (`delta.y=0`).
+- Spawned Monster visual initialization was also unified with the standard `UIProceduralTextureFactory.GetMonsterStandeeSprite()` pipeline and the legacy 3D `MONSTER` label was removed.
+- Reported validation: dedicated 12/12, Play Mode scenarios A-L, cumulative regressions 125/125, compile 0 errors/0 warnings.
+- This is recorded as `PASS / REMEDIATED` for the UI-02 runtime combat-height sub-milestone; it does **not** globally lock UI-02.
+- Full session package: `PROJECT_MEMORY/CHAT_HANDOFF_2026-09-16.md`.
+
 ## Future revision rule
 Every new gameplay or UI change must record: old rule -> evidence/reason -> new rule -> status -> affected milestone/code -> tests required. Never delete historical decisions to hide a conflict.
