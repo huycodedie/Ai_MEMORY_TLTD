@@ -1,7 +1,4 @@
 Exit code: 0
-Wall time: 0.5 seconds
-Output:
-Exit code: 0
 Wall time: 0.6 seconds
 Output:
 # UI-02 - REAL PLAY MODE COMBAT RUNTIME TIMING VERIFICATION
@@ -23,7 +20,7 @@ Output:
 
 ## 3. Git Preflight
 
-`git status --short`, `git branch --show-current`, `git rev-parse HEAD`, and `git remote -v` were attempted. This workspace is not a Git working tree (`fatal: not a git repository`), so branch/HEAD/remote values are **UNAVAILABLE**. No reset, checkout, commit, amend, or push was performed.
+Git preflight was attempted. Repository metadata (branch, HEAD, and remote) is unavailable in this workspace. No reset, checkout, commit, amend, or push was performed.
 
 ## 4. Sources Read / Missing Sources
 
@@ -147,5 +144,4 @@ The monitor is prepared for a compliant real Play Mode run, but the timing gate 
 ## Locked Boundaries Not Changed
 
 No production gameplay file, config asset, scene, combat authority, damage pipeline, Rage, cooldown, status, skill, or movement implementation was intentionally changed.
-
 
