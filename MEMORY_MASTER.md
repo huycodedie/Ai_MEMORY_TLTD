@@ -1,10 +1,11 @@
 # TLTD AI MEMORY MASTER
 
 ## 1. Project identity
-- Project: TLTD / Giang Ho Trong Tay
-- Engine: Unity + C#
-- Development environment: Windows, Google Antigravity IDE
-- Local repository: `E:\\code\\TLTD`
+- Project: TLTD / Giang Ho Trong Tay / Thao Thiet Long Than Dao.
+- Engine: Unity + C#; current project reports use Unity 6000.6.0f1 (64-bit).
+- Development environment: Windows, Google Antigravity IDE.
+- Local workspace: `E:\code\TLTD`.
+- Long-term memory repository: `huycodedie/Ai_MEMORY_TLTD`.
 - Architecture goal: modular, data-driven, extensible, testable, deterministic where required.
 
 ## 2. Mandatory response/audit behavior
@@ -25,7 +26,7 @@
 - D1-D23 are the game's locked design contract.
 - The original D1-D23 document supplied by the user is the highest-priority source of truth.
 - Later explicit user-approved amendments/revisions supersede older rules when the superseding relationship is proven.
-- P01+ behavior that was actually tested and explicitly accepted can supersede older historical implementation descriptions.
+- P01+ behavior that was actually tested and explicitly accepted/locked by the user can supersede older historical implementation descriptions.
 - Never silently change, reinterpret, simplify, or replace a locked rule.
 - Never invent missing D1-D23 details.
 - If a new implementation conflicts with a locked rule and no superseding decision is proven, STOP and report `ARCHITECTURE/DESIGN CONFLICT WITH LOCKED BASELINE`.
@@ -39,7 +40,7 @@
 - Prefer extending the existing system over creating a parallel system.
 - Data that designers may tune should be data-driven/configurable rather than hard-coded when the architecture supports it.
 - UI is presentation only and must not become the gameplay authority.
-- Do not create a second damage pipeline, status pipeline, skill pipeline, or EventBus.
+- Do not create a second damage pipeline, status pipeline, skill pipeline, EventBus, distance authority, or combat engine.
 
 ## 5. Core combat baseline
 - Player: 1 main Hero + up to 5 Companions.
@@ -98,7 +99,7 @@
 - `EffectResolver` is the central effect resolution path.
 - `SkillExecutor` is the skill execution path.
 - `SkillExecutionValidator` validates skill use conditions.
-- Shield authority is also integrated into `EntityStatusController` under P07.8.
+- Shield authority is integrated into `EntityStatusController` under P07.8.
 - Do not create parallel DebuffManager/CCManager/CleanseManager/DispelManager/ShieldManager unless a repository audit proves the existing abstraction cannot support the feature and the user explicitly approves a redesign.
 
 ## 11. P07.5 locked
@@ -162,49 +163,126 @@
 - Master Regression P01-P07.8: 100% PASS according to the latest user-provided report.
 - P07.8 is LOCKED based on that acceptance evidence.
 
-## 15. P07.8 visual acceptance evidence
-- V01 Shield Application: PASS.
-- V02 Full Absorption: PASS.
-- V03 Partial Absorption: PASS.
-- V04 Shield Depletion: PASS.
-- V05 Multiple Shields: PASS.
-- V06 Real Combat: PASS.
-- V07 Expiration/Removal: PASS.
-- V08 BattleHUD: PASS.
-- UI tests: PASS (5/5).
-- Visual verification: PASS.
-- These are user-provided acceptance results, not independent execution by the assistant.
+## 15. P07.9 — LOCKED
+P07.9 = Advanced Skill Casting (Cast Time / Channel / Interrupt).
+- Instant CastTime=0 executes synchronously.
+- Cast progression and Channel progression are runtime-driven.
+- Rage is consumed at Cast Start; interrupted casts receive no refund.
+- Cast-time cooldown begins at Cast Complete; Channel cooldown begins when channel ends.
+- Interrupted before completion has no normal cooldown.
+- Casting locks movement.
+- Stun and Freeze interrupt active Cast/Channel.
+- Root does not interrupt.
+- Ordinary damage does not interrupt.
+- Existing `EntityStatusController` remains sole CC authority.
+- Existing `Entity.InterruptCurrentAction` is the integration point.
+- No second skill execution authority, global loop, coroutine/async timing authority, or Animator-dependent timing authority.
+- Ultimate validation occurs before Rage deduction.
+- Death/target-death invalid paths remain protected.
+- UI is presentation only.
+- Reported final evidence: Phase2.3 13/13 on three consecutive runs after test-only Dodge hardening; targeted regressions 234/234; full Master Regression 1043/1043; compile 0 errors/0 warnings.
+- P07.9 was explicitly LOCKED by the user.
 
-## 16. Master Regression — latest official report
-The latest user-provided Unity execution log reports 100% PASS across P01 through P07.8, including P07.8 55/55. Reported suites include P02 13/13, P03 15/15, P04 19/19, P05.0 50/50, P05.1 40/40, P05.2 27/27, P05.3 8/8, P05.4 33/33, P05.5 12/12, P05.6 43/43, P05.7 31/31, P05.7.1 22/22, P05.7.2 28/28, P05.7.3 20/20, P05.7.4 28/28, P05.8 25/25, P05.9 20/20, P05.9.1 15/15, P05.9.1 Hotfix 14/14, P05/D24 25/25, TBREQ 20/20, HOTFIX 11/11, CAP_HOTFIX 25/25, COUNT_FIX 14/14, STATE_FIX 20/20, P06 20/20, P07.1 16/16, P07.2 22/22, P07.3 25/25, P07.4 45/45, P07.5 46/46, P07.6 55/55, P07.7 55/55, P07.8 55/55.
+## 16. P07.9.1 — LOCKED
+P07.9.1 = Hero Autonomous Skill Decision & Auto Combat.
+- Auto ON: autonomous normal-skill decisions plus Basic Attack behavior.
+- Normal skill priority: Priority DESC, SkillId ordinal ASC tie-break.
+- Ultimate can preempt/interrupt Basic Attack windup according to tested current behavior.
+- Auto OFF disables autonomous normal-skill/ultimate decisions while Basic Attack remains active according to tested behavior.
+- Manual skills continue through the existing validator/executor pipeline.
+- `HeroSkillDecisionController` only reads Rage; it does not own Rage mutation.
+- Ultimate RageCost is read from `SkillDefinitionSO.RageCost`.
+- Active Cast/Channel keeps `IsCasting` true and blocks Basic Attack.
+- Existing P07.8/P07.9 authorities remain authoritative.
+- Reported evidence: dedicated 16/16; P07.8 55/55; P07.9 Phase5.3 36/36; P07.9 Risk04 18/18; historical Master P01-P07.8 PASS; compile 0 errors/0 warnings; runtime scenarios A-E PASS.
+- Full baseline: `PROJECT_MEMORY/P07_9_1_LOCKED.md`.
+- P07.9.1 is LOCKED based on supplied execution evidence.
 
-Reported regression cleanup fixes:
-- Added `CleanTestEnvironment()` to remove leaked singleton/GameObject/EventBus/PlayerPrefs state and load a clean scene before suites and master regression.
-- P05.7.1.14 `MonsterAttackResumes` was hardened against random Dodge by allowing repeated ticks according to the reported fix.
+## 17. UI design baseline
+- `PROJECT_MEMORY/UI_DESIGN_AUTHORITY.md` is the structural UI baseline.
+- Game is 2D mobile portrait / vertical-first.
+- Global bottom navigation is the game shell, not owned by Công Pháp.
+- 5 primary navigation positions; center = Main Hub / Main Game Frame.
+- Main Content Area changes for major systems; no second navigation framework.
+- Công Pháp is a dedicated system screen/module.
+- Exact labels/icons, artwork, spacing, font, colors and detailed interaction remain open unless separately approved.
+- `PROJECT_MEMORY/UI_REDESIGN_SPECIFICATION.md` is an approved implementation specification, not a global gameplay lock.
 
-## 17. Milestone history
-- P06: Play Mode Acceptance 14/14 PASS; visual verification YES; LOCKED.
-- P07.1: Automated 16/16; Play Mode 22/22; LOCKED.
-- P07.2: Automated 22/22; Play Mode 39/39; LOCKED.
-- P07.3: Automated 25/25; Play Mode 25/25; LOCKED.
-- P07.4: Automated 45/45; Play Mode 36/36; Master 32/32 suites PASS; LOCKED.
-- P07.5: Automated 46/46; Play Mode 30/30; Master P01-P07.5 PASS; LOCKED.
-- P07.6: Automated 55/55; Play Mode 35/35; Master PASS; LOCKED.
-- P07.7: Automated 55/55; Play Mode 35/35; Master PASS; LOCKED.
-- P07.8: Automated 55/55; Play Mode 35/35; UI 5/5; Visual V01-V08 PASS; Master Regression PASS; LOCKED.
+## 18. UI-01 status
+UI-01 Foundation was reported PASS:
+- Portrait 1080x1920.
+- `SafeAreaRoot -> MainGameShell -> MainContentArea + GlobalBottomNavigation` hierarchy.
+- Safe Area uses `Screen.safeArea`.
+- Debug controls moved to drawer.
+- Compile 0 errors/warnings.
+- P07.8 55/55, P07.9 Phase5.3 36/36, Risk04 18/18, targeted regression 109/109 reported PASS.
+- Reported nav labels `Túi Đồ`, `Tâm Pháp`, `Đại Điện`, `Bang Hội`, `Thiết Lập` are implementation placeholders, not newly locked gameplay/design names.
 
-## 18. Current project state
-- P07.8 is LOCKED.
-- The previous P07.8 blocker (missing Shield visual UI) is resolved according to the latest user-provided remediation/acceptance report.
-- Do not perform unnecessary P07.8 backend rewrites.
-- The next milestone may be P07.9, but it must begin with repository/architecture audit.
+## 19. UI-02 current status
+- Global UI-02 is NOT LOCKED.
+- Pre-implementation audit found TopHeader, MonsterUI, HeroUI, CastBarUI, Shield presentation, skill bar, Companion HUD, equipment/inventory overlay and DamagePopup still needing presentation work.
+- UI must bind to existing authoritative runtime state and must not create duplicate gameplay authorities.
 
-## 19. Roadmap
-P07.4 Heal + Buff -> P07.5 Debuff + DoT + Status Tick -> P07.6 Debuff + CC + Resistance + AntiCC -> P07.7 Cleanse + Dispel + Status Removal -> P07.8 Shield/Barrier -> P07.9 Advanced Skill Casting (Cast Time/Channel/Interrupt) -> P07.10 AOE/Multi Target -> P07.11 Projectile/Dash/Movement Skill -> P07.12 Advanced Combat Integration.
-The roadmap is provisional beyond already-locked milestones; detailed future gameplay is not locked until explicitly approved.
+## 20. UI-02 Runtime Combat Height Fix — PASS / REMEDIATED
+A runtime deadlock was confirmed after Monster #1 death:
+- Encounter #1 Hero and Monster both used Y=-0.3 and combat worked.
+- Encounter #2 legacy Monster spawn used Y=-1.2 while Hero remained at Y=-0.3.
+- Movement used horizontal distance (`delta.y=0`) and stopped at AttackRange 1.8.
+- Attack used full `Vector3.Distance`, making 3D distance exceed the 1.9 attack threshold when DeltaY was 0.9.
+- Result: Movement stopped while Attack remained out of range, producing permanent deadlock.
 
-## 20. P07.9 rule
-P07.9 may now be prepared because P07.8 is LOCKED. Before implementation, audit SkillExecutor, SkillExecutionValidator, EffectResolver, SkillDefinitionSO, current CC interrupt behavior, Stun/Freeze/Root, EventBus, cooldown, Rage, and multi-effect execution. Extend existing systems; do not create a second interrupt system. Do not invent cast/channel durations, interruption rules, costs, or UI behavior that are not explicitly approved.
+Current remediation:
+- `BattleManager.monsterSpawnPosition` changed from `(4,-1.2,0)` to `(4,-0.3,0)`.
+- `Prototype01SceneBuilder` serializes the same spawn Y.
+- `AttackComponent` now uses the same horizontal combat-plane distance model as Movement (`delta.y=0`, then magnitude).
+- Spawned monsters reuse `UIProceduralTextureFactory.GetMonsterStandeeSprite()`, scale `(1.1,1.1,1)`, sorting order 10, `flipX=true`; legacy white placeholder and 3D `MONSTER` label removed.
+- Reported dedicated validation: 12/12 PASS.
+- Reported Play Mode scenarios A-L PASS across Encounters 1-3 without manual reposition.
+- Reported regression: 125/125 across P07.8, P07.9 Phase5.3, P07.9 Risk04, P07.9.1.
+- Reported compile: 0 errors / 0 warnings.
+- Reported locked gameplay authorities untouched: SkillExecutor, SkillExecutionValidator, SkillCastState, CooldownManager, RageComponent, EntityStatusController, DamageCalculator, HealthComponent, BasicAttackProcessor, HeroSkillDecisionController.
+- Status: `PASS / REMEDIATED` based on user-provided evidence. This does not globally lock UI-02.
+- Do not revert this fix and do not replace it with a fake range-tolerance workaround.
 
-## 21. Final operating rule
+## 21. UI-02 next immediate task
+Create a test-only **Combat Runtime Timing Monitor** before further UI-02 presentation work.
+Suggested files:
+- `Assets/_Game/Editor/Prototype01CombatRuntimeTimingMonitor.cs`
+- `PROJECT_MEMORY/UI-02_COMBAT_RUNTIME_TIMING_REPORT.md`
+
+Monitor requirements:
+- Measure real wall-clock and Unity runtime timing.
+- Observe Encounter 1 -> 2 -> 3 (and 4 if possible).
+- Record MonsterSpawn, HeroMoveStart, HeroEnterAttackRange, HeroFirstAttack, MonsterFirstAttack, FirstDamage, MonsterDeath, NextEncounterSpawn.
+- Record available Hero/Monster positions, alive state, Rage, attack timer/interval, AttackRange, target state.
+- Record DeltaX, DeltaY, horizontal distance, full 3D distance, attack threshold.
+- Record `Time.realtimeSinceStartup`, `Time.time`, and `Time.timeScale`.
+- Diagnostic deadlock timeout may be 5 realtime seconds; this is NOT a gameplay rule.
+- Do not teleport entities, manually attack, manually correct Y, manipulate Time.timeScale, fake timing with Sleep/WaitForSeconds, or modify gameplay authority merely to expose timing.
+- If an API is unavailable, report `[UNAVAILABLE_FROM_CURRENT_API]` rather than modifying production architecture.
+- Timing test must not become a second combat/timer authority.
+
+## 22. Critical verification lesson
+Some earlier automated tests forced Hero and Monster to the same Y coordinate, which masked the actual Prototype01 spawn discrepancy. Future tests must include real scene runtime and multi-encounter transitions and must not repair the condition under test through fixtures, teleportation or manual actions.
+
+## 23. Continuation / new-chat handoff
+For a complete current-session package, read:
+- `PROJECT_MEMORY/CHAT_HANDOFF_2026-09-16.md`
+
+Continuation order:
+1. Read `AI_RULES.md`.
+2. Read `CURRENT_DESIGN_AUTHORITY.md`.
+3. Read `D1_D23_LOCKED.md` and amendments.
+4. Read `CHAT_HANDOFF_2026-09-16.md`.
+5. If working on UI-02, read UI-02 audit/spec/report files.
+6. Treat P07.8, P07.9, P07.9.1 as LOCKED.
+7. Treat the Y-axis combat fix as the current runtime baseline.
+8. Audit new PASS claims against concrete evidence.
+9. Continue with Combat Runtime Timing Monitor, then UI-02 Combat HUD.
+10. Do not globally lock UI-02 until required runtime/visual acceptance is complete.
+
+## 24. Final operating rule
 If evidence and a report disagree, trust concrete evidence. If design and implementation disagree, preserve the latest proven locked design and report the conflict. If a later explicit user decision supersedes an older rule, record it in `DESIGN_CHANGELOG.md`. If something is unknown, say it is unknown rather than inventing it.
+
+## 25. Evidence qualifier
+Execution counts, Play Mode results, visual results and compile results in this memory are user-provided project evidence unless explicitly independently executed in the current chat. Never convert a report claim into independent verification.
