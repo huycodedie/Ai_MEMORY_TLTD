@@ -78,17 +78,47 @@ If a conflict cannot be proven as superseded: STOP and report it. Never guess.
 P07.8 Shield/Barrier is LOCKED according to the latest user-provided acceptance report: Automated 55/55, Play Mode 35/35, UI 5/5, Visual V01-V08 PASS, Master Regression P01-P07.8 PASS.
 
 ## P07.9 status
-P07.9 is in active implementation/audit and is **not locked**. Approved design decisions include:
-- Stun interrupts active Cast/Channel.
-- Freeze interrupts active Cast/Channel.
-- Root does not interrupt.
-- Ordinary damage does not interrupt.
-- Rage is consumed at Cast Start; interrupted casts receive no Rage refund.
-- Interrupted before completion has no cooldown.
-- Interrupted cast does not execute deferred final effects; already-executed channel ticks remain.
-- Existing EntityStatusController remains the sole CC authority.
-- Existing Entity.InterruptCurrentAction is the integration point.
-- No second skill execution authority, global loop, coroutine, async loop, or Animator-dependent timing system.
+P07.9 Advanced Skill Casting is **LOCKED** according to the user's final acceptance. Locked behavior includes Cast/Channel progression, Rage at Cast Start/no refund, cooldown after successful completion, no normal cooldown for interruption before completion, movement lock while casting, Stun/Freeze interrupt, Root/ordinary damage no interrupt, existing authority preservation, Ultimate validation before Rage, and no second execution/interrupt authority.
+
+## P07.9.1 status
+P07.9.1 Hero Autonomous Skill Decision & Auto Combat is **LOCKED** according to the user's final audit/execution report. Locked behavior includes data-driven normal-skill priority, Auto ON autonomous normal skills, Auto OFF disabling autonomous skill/ultimate decisions while Basic Attack remains active, Ultimate RageCost read from `SkillDefinitionSO.RageCost`, Rage mutation remaining in the existing authority, and Basic Attack blocked during active Cast/Channel. Reported validation: dedicated 16/16, P07.8 55/55, P07.9 Phase5.3 36/36, P07.9 Risk04 18/18, historical Master P01-P07.8 PASS, compile 0 errors/0 warnings, runtime scenarios A-E PASS. Full baseline is in `PROJECT_MEMORY/P07_9_1_LOCKED.md`.
+
+## UI-02 status
+Global UI-02 is **NOT LOCKED**.
+
+### UI-02 runtime combat height remediation
+The user-provided 2026-09-16 remediation report confirms a runtime deadlock caused by:
+1. legacy `BattleManager.monsterSpawnPosition` Y=-1.2 versus the active Prototype01 combat plane Y=-0.3; and
+2. Movement using horizontal distance while Attack previously used full `Vector3.Distance`.
+
+Current remediation baseline:
+- Monster spawn Y = -0.3.
+- `Prototype01SceneBuilder` serializes the same spawn Y.
+- `AttackComponent` uses the same horizontal combat-plane distance model as `MovementComponent` (`delta.y = 0`, then magnitude).
+- Spawned monsters reuse `UIProceduralTextureFactory.GetMonsterStandeeSprite()`, scale `(1.1,1.1,1)`, sorting order 10, `flipX=true`, with legacy 3D `MONSTER` label removed.
+- Dedicated validation reported 12/12 PASS.
+- Multi-encounter Play Mode scenarios A-L reported PASS.
+- Regression reported: 125/125 across P07.8, P07.9 Phase5.3, P07.9 Risk04, P07.9.1.
+- Compile reported 0 errors/0 warnings.
+- Locked P07.8/P07.9/P07.9.1 gameplay authorities were reported untouched.
+
+Treat this as `PASS / REMEDIATED` based on user-provided evidence, not as global UI-02 LOCK.
+Do not revert this Y-axis fix and do not replace it with a fake range-tolerance workaround.
+
+### UI-02 next step
+The immediate next task is a **test-only Combat Runtime Timing Monitor** before further UI-02 presentation work.
+Suggested instrumentation/report:
+- `Assets/_Game/Editor/Prototype01CombatRuntimeTimingMonitor.cs`
+- `PROJECT_MEMORY/UI-02_COMBAT_RUNTIME_TIMING_REPORT.md`
+
+The monitor should observe real runtime timing for Encounter 1 -> 2 -> 3 (and 4 if possible), including spawn, movement, range entry, first attack, damage, death, next spawn, positions, DeltaX/DeltaY, horizontal distance, full 3D distance, attack threshold, available timers, `Time.realtimeSinceStartup`, `Time.time`, and `Time.timeScale`.
+It must not teleport entities, manually attack, fake timing with sleeps, alter gameplay authority, or add a second combat/timing authority. If an API is unavailable, report it rather than modifying gameplay code merely to expose it.
 
 ## Implementation rule
 P01+ tested-and-accepted behavior may supersede an older historical design rule. Record the change; do not silently overwrite history.
+
+## Evidence qualifier
+All execution/visual/regression numbers stated above come from user-provided project reports unless independently executed in the current chat. Never convert a report claim into independent verification.
+
+## Continuation handoff
+For the full current-chat package, read `PROJECT_MEMORY/CHAT_HANDOFF_2026-09-16.md`.
