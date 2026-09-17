@@ -89,6 +89,9 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - Reported validation: dedicated 12/12, Play Mode scenarios A-L, cumulative regressions 125/125, compile 0 errors/0 warnings.
 - Real Play Mode runtime timing verification confirmed 3/3 consecutive encounters with zero deadlock. Full regression: 137/137 PASS. Visual Acceptance: 4/4 mandatory screenshots (1080x1920) VERIFIED PASS.
 - Status: `LOCKED` as of 2026-09-17 (Project Owner acceptance + Tech Lead approval).
+- Final UI-02 timing verification compile result: PASS with 0 errors and 8 warnings (4 unique pre-existing warnings).
+- This corrects the “0 warnings” summary accidentally written in commit 2ca6169 metadata/current milestone summary.
+- Warning correction does not affect the UI-02 LOCK decision.
 
 ## Future revision rule
 Every new gameplay or UI change must record: old rule -> evidence/reason -> new rule -> status -> affected milestone/code -> tests required. Never delete historical decisions to hide a conflict.

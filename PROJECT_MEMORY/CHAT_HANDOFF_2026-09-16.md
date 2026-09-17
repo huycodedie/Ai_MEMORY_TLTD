@@ -449,7 +449,8 @@ Y-axis remediation       = PASS / current baseline
 12 dedicated tests       = PASS (reported)
 Multi-encounter PlayMode = PASS (reported)
 125 regressions          = PASS (reported)
-Compile                  = 0 errors / 0 warnings (reported)
+Compile                  = PASS — 0 errors / 8 warnings
+          (4 unique pre-existing, non-blocking warnings)
 
 NEXT:
 Combat Runtime Timing Monitor (COMPLETED)

@@ -96,7 +96,7 @@ The runtime deadlock caused by Y-axis discrepancy ($Y = -1.2\text{m}$ vs $Y = -0
 - Play Mode real runtime timing verification: 3/3 consecutive encounters completed by `MonsterDeath` with zero deadlock observed.
 - Full regression: 137/137 PASS across all 5 test suites (UI-02 Height Fix 12, P07.8 55, P07.9 Phase5.3 36, P07.9 Risk04 18, P07.9.1 16).
 - Visual Acceptance: 4/4 mandatory 1080x1920 reference portrait screenshots VERIFIED PASS (`UI02_VISUAL_01_Encounter1Combat.png` to `UI02_VISUAL_04_Encounter3Combat.png`).
-- Compile: 0 errors / 0 warnings.
+- Compile: PASS — 0 errors / 8 warnings (4 unique pre-existing, non-blocking warnings in legacy test runners).
 - Locked P07.8/P07.9/P07.9.1 and D1-D23 gameplay authorities remain untouched.
 - Non-blocking presentation debt (modal coordination, damage popup styling, font scaling) is explicitly deferred to `UI-POLISH-01`.
 
