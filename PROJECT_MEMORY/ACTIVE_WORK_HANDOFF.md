@@ -25,23 +25,10 @@ The first source report was received but is blocked by an invalid claimed remote
 `1080x1920` is the reference coordinate system only. The design must support common portrait phones, tall screens, portrait tablets, notches and gesture/home-indicator Safe Areas.
 
 ## Required next deliverable
-Create and review a responsive UI layout specification/wireframe covering at minimum:
-
-- Global portrait shell.
-- Top HUD/resource region.
-- Combat viewport and protected combat zone.
-- Hero/Monster HUD placement.
-- Skill/action region.
-- Five-position Global Bottom Navigation.
-- Modal layer and backdrop.
-- Equipment Comparison.
-- Cấp Rơi.
-- Tâm Pháp/Công Pháp.
-- Hero and Companion/Hiệp Khách presentation.
-- Compact, standard and tall portrait behavior.
-- Tablet width constraints and Safe Area behavior.
-
-Do not allow the implementation executor to invent screen composition while writing code.
+1. Attach `review_package_b1.zip` to ChatGPT/Codex and verify SHA-256 `7FE7C13798A2FF005B891E422C0AC5866EC72D0146B10A72E10BA8D8F4BA446D`.
+2. Supply the read-only supplement required by `UI-POLISH-01_PHASE_B1_SOURCE_REPORT_REVIEW.md`.
+3. Tech Lead inspects actual source and produces a bounded correction plan.
+4. Only an explicit later authorization may permit Antigravity to edit Unity.
 
 Locked authority: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`. It defines root hierarchy, Safe Area ownership, responsive classes, global shell zones, combat/system layout, modal geometry and B1 reconciliation gates.
 
@@ -55,7 +42,7 @@ Project Owner-approved layout/visual reference:
 Use the sample `Giang Hồ Trong Tay` screens for layout/composition guidance only. They do not override TLTD gameplay authority.
 
 ## Current exclusions
-Do not start the following before responsive layout approval and runtime stability:
+Do not start the following before runtime stability and explicit later authorization:
 
 - Final visual polish.
 - Decorative frames and final color treatment.
