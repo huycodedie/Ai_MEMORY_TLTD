@@ -103,6 +103,14 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - Full authority: `PROJECT_MEMORY/UI_RESPONSIVE_LAYOUT_AUTHORITY.md`.
 - Status: `LOCKED — RESPONSIVE LAYOUT DIRECTION` as of 2026-09-17.
 
+## 2026-09-17 — UI-POLISH-01 Phase B1 out-of-sequence implementation review
+- The Project Owner supplied an Antigravity report claiming a local Phase B1 modal-coordination implementation, compile PASS, 17/17 new tests, 137/137 regressions and runtime scenarios A-F PASS.
+- The implementation occurred before the required responsive-layout/wireframe review and is therefore not accepted as canonical milestone evidence.
+- The source project is not a Git repository and the executor's local documentation commit `27ba4ce` was not pushed; its claims remain executor-reported rather than independently verified.
+- Further Phase B edits are frozen. Preserve the local work for read-only inspection and reconciliation after responsive layout approval; do not roll it back merely to restore the earlier status wording.
+- Canonical status: `Phase B1 = LOCAL IMPLEMENTATION REPORTED / NOT ACCEPTED / VERIFICATION PENDING`; UI-POLISH-01 remains not locked.
+- Detailed decision and technical blockers: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`.
+
 ### Persistent continuity and Git synchronization
 - The Project Owner requires every approved project decision to be committed, pushed and verified in the memory repository so work can continue across new chats and changed workspaces without losing context.
 - ChatGPT/Codex is the primary coordinator, Tech Lead/design authority and memory publisher.

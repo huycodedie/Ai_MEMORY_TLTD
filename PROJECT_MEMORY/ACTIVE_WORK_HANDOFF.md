@@ -10,7 +10,8 @@
 ## Current milestone state
 - `UI-02 = LOCKED` as of `2026-09-17`.
 - `UI-POLISH-01 Phase A = AUDIT COMPLETE`.
-- `UI-POLISH-01 = RESPONSIVE LAYOUT DESIGN REQUIRED / IMPLEMENTATION NOT STARTED / NOT LOCKED`.
+- `UI-POLISH-01 = RESPONSIVE LAYOUT DESIGN REQUIRED / NOT LOCKED`.
+- `UI-POLISH-01 Phase B1 = LOCAL IMPLEMENTATION REPORTED / NOT ACCEPTED / VERIFICATION PENDING`.
 - `P08 = NOT STARTED`.
 
 ## Current active objective
@@ -36,6 +37,8 @@ Create and review a responsive UI layout specification/wireframe covering at min
 - Tablet width constraints and Safe Area behavior.
 
 Do not allow the implementation executor to invent screen composition while writing code.
+
+An out-of-sequence local Phase B1 implementation has been reported. Freeze further Phase B edits, preserve the local files for inspection, and do not promote the report's `IMPLEMENTED / VERIFICATION PASS` claim into canonical status. The responsive layout/wireframe remains the next deliverable. After layout approval, inspect and reconcile the B1 implementation before rerunning verification.
 
 ## Visual reference
 Project Owner-approved layout/visual reference:
@@ -63,7 +66,8 @@ Functional layout, anchoring, Safe Area support, scrolling, input blocking and m
 4. `PROJECT_MEMORY/UI_DESIGN_AUTHORITY.md`
 5. `PROJECT_MEMORY/UI_RESPONSIVE_LAYOUT_AUTHORITY.md`
 6. `PROJECT_MEMORY/UI-POLISH-01_ARCHITECTURE_AUDIT.md`
-7. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
+7. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`
+8. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
 
 ## Role model
 - ChatGPT/Codex: primary coordinator, Tech Lead, design authority and memory publisher.
@@ -72,4 +76,5 @@ Functional layout, anchoring, Safe Area support, scrolling, input blocking and m
 
 ## Known blockers
 - None for responsive layout design.
-- Unity implementation remains intentionally blocked until the layout specification/wireframe is reviewed.
+- Further Unity Phase B implementation remains blocked until the layout specification/wireframe is reviewed.
+- Phase B1 acceptance is blocked on actual-source inspection, raw evidence review and reconciliation with the approved responsive layout.

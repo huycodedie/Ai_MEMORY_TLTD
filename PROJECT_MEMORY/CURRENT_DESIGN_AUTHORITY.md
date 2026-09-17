@@ -107,7 +107,7 @@ The runtime deadlock caused by Y-axis discrepancy ($Y = -1.2\text{m}$ vs $Y = -0
 
 ## UI-POLISH-01 status
 UI-POLISH-01 Phase A (Architecture Audit) is **AUDIT COMPLETE**.
-Implementation has **NOT STARTED**.
+An executor report states that a local Phase B1 implementation now exists in `E:\code\TLTD`, but it was created before the required responsive-layout approval. It is **NOT ACCEPTED AS CANONICAL / VERIFICATION PENDING**. Preserve it for inspection; do not treat its reported test results as independent verification and do not continue Phase B code changes yet.
 - Scope audited: Modal coordination, full-screen input blocker / backdrop, mobile readability (1080x1920 reference portrait), floating combat text lifecycle, and listener lifecycle safety.
 - Root causes: 100% verified from code and visual evidence.
 - Proposed architecture: Non-intrusive `ModalCoordinator` with priority queuing, single exclusive blocking modal invariant, and full-screen `ModalBackdrop`. Zero modification to combat formulas, item stats, or `Time.timeScale`.
@@ -118,9 +118,10 @@ Implementation has **NOT STARTED**.
 - Current scope is structural layout and functional stability. Final colors, decorative frames, icon art, visual polish, transitions and Unity `Animator` work are deferred until the game is stable and relevant verification passes.
 - Visual reference: the Project Owner's `Giang Hồ Trong Tay` screenshot collection in Google Drive guides layout/composition only and does not supersede gameplay authority.
 - Responsive rule: `1080x1920` is the reference coordinate system; common portrait phones, tall screens, tablets and Safe Area obstructions must be supported.
-- Status rule: UI-POLISH-01 is NOT locked and NOT declared PASS. Responsive layout design is the required next deliverable; implementation remains NOT STARTED.
+- Phase B1 Tech Lead review: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`.
+- Status rule: UI-POLISH-01 is NOT locked and NOT declared PASS. Responsive layout design remains the required next deliverable. The reported local B1 implementation is quarantined for later inspection and layout reconciliation.
 
-*Milestone status: UI-02 remains LOCKED. UI-POLISH-01 = AUDIT COMPLETE / RESPONSIVE LAYOUT DESIGN REQUIRED / IMPLEMENTATION NOT STARTED. P08 remains NOT STARTED.*
+*Milestone status: UI-02 remains LOCKED. UI-POLISH-01 = AUDIT COMPLETE / RESPONSIVE LAYOUT DESIGN REQUIRED / B1 LOCAL IMPLEMENTATION REPORTED BUT NOT ACCEPTED / NOT LOCKED. P08 remains NOT STARTED.*
 
 ## Implementation rule
 P01+ tested-and-accepted behavior may supersede an older historical design rule. Record the change; do not silently overwrite history.
