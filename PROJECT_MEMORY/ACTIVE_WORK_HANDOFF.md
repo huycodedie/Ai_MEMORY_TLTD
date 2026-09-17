@@ -4,8 +4,8 @@
 - Last updated: `2026-09-17`.
 - Memory repository: `huycodedie/Ai_MEMORY_TLTD`.
 - Branch: `main`.
-- Last completed authority commit before this handoff: `b5b0838ee471c9fdd79703d46000ce9db6f36570` — `docs(ui): lock responsive layout direction`.
-- This file must be updated with the final commit SHA after each subsequent accepted handoff change.
+- Authority base verified before this handoff update: `fd5b3e57720649f2e62973dec46aef0b627d9972` — `docs(ui-polish-01): record b1 review gate`.
+- The latest remote commit must always be verified after publication; a handoff file cannot embed the SHA of the commit that contains itself.
 
 ## Current milestone state
 - `UI-02 = LOCKED` as of `2026-09-17`.
