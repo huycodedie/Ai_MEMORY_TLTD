@@ -100,7 +100,20 @@ The runtime deadlock caused by Y-axis discrepancy ($Y = -1.2\text{m}$ vs $Y = -0
 - Locked P07.8/P07.9/P07.9.1 and D1-D23 gameplay authorities remain untouched.
 - Non-blocking presentation debt (modal coordination, damage popup styling, font scaling) is explicitly deferred to `UI-POLISH-01`.
 
-*Status: Milestone UI-02 is LOCKED. P08 and UI-POLISH-01 have NOT yet started.*
+*Status: Milestone UI-02 is LOCKED.*
+
+## UI-POLISH-01 status
+UI-POLISH-01 Phase A (Architecture Audit) is **AUDIT COMPLETE**.
+Implementation has **NOT STARTED**.
+- Scope audited: Modal coordination, full-screen input blocker / backdrop, mobile readability (1080x1920 reference portrait), floating combat text lifecycle, and listener lifecycle safety.
+- Root causes: 100% verified from code and visual evidence.
+- Proposed architecture: Non-intrusive `ModalCoordinator` with priority queuing, single exclusive blocking modal invariant, and full-screen `ModalBackdrop`. Zero modification to combat formulas, item stats, or `Time.timeScale`.
+- Implementation plan: Phased plan defined (Phase B1: Modal Exclusivity & Queue; Phase B2: Pending Payload Safety; Phase B3: Typography & Touch Targets; Phase B4: Damage Popup Lifecycle & Pooling).
+- Test matrix: 15 dedicated verification scenarios established.
+- Audit report: Complete documentation recorded in `PROJECT_MEMORY/UI-POLISH-01_ARCHITECTURE_AUDIT.md`.
+- Status rule: UI-POLISH-01 is NOT locked and NOT declared PASS. Implementation will begin in Phase B.
+
+*Milestone status: UI-02 remains LOCKED. UI-POLISH-01 = AUDIT COMPLETE / IMPLEMENTATION NOT STARTED. P08 remains NOT STARTED.*
 
 ## Implementation rule
 P01+ tested-and-accepted behavior may supersede an older historical design rule. Record the change; do not silently overwrite history.
