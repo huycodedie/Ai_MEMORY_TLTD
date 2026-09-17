@@ -111,6 +111,17 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - Canonical status: `Phase B1 = LOCAL IMPLEMENTATION REPORTED / NOT ACCEPTED / VERIFICATION PENDING`; UI-POLISH-01 remains not locked.
 - Detailed decision and technical blockers: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`.
 
+## 2026-09-17 — UI-POLISH-01 responsive layout approved and locked
+- The Project Owner approved the responsive portrait layout direction and specification.
+- `1080x1920` remains the reference coordinate system rather than a single-device target.
+- Locked coverage includes compact, standard and tall phones, narrow screens, portrait tablets and runtime Safe Area insets.
+- Locked structure includes a persistent five-position Global Bottom Navigation, flexible primary/context regions, a full-physical-screen modal backdrop, Safe Area-constrained modal content, bounded tablet width and scroll-based overflow handling.
+- `Công Pháp` remains a dedicated system screen/module.
+- Final visual polish, decorative assets, transitions and Unity `Animator` remain deferred until runtime stability.
+- This approval does not accept the out-of-sequence local B1 implementation. B1 requires actual-source inspection, controlled reconciliation and rerun verification.
+- Authority: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`.
+- Status: `LOCKED — PROJECT OWNER APPROVED RESPONSIVE LAYOUT AUTHORITY` as of 2026-09-17.
+
 ### Persistent continuity and Git synchronization
 - The Project Owner requires every approved project decision to be committed, pushed and verified in the memory repository so work can continue across new chats and changed workspaces without losing context.
 - ChatGPT/Codex is the primary coordinator, Tech Lead/design authority and memory publisher.

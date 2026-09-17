@@ -49,4 +49,4 @@ Before implementing new UI layout work, read:
 - `UI_RESPONSIVE_LAYOUT_AUTHORITY.md` — responsive portrait rules, Safe Area coverage, reference-resolution meaning, visual-reference boundary and the required layout-first implementation order.
 - `UI-POLISH-01_ARCHITECTURE_AUDIT.md` — current modal/lifecycle architecture findings.
 - `UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md` — review of the out-of-sequence local B1 implementation and requirements before acceptance.
-- `UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md` — draft responsive shell, screen and modal layout rules awaiting Project Owner review.
+- `UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md` — locked Project Owner-approved responsive shell, screen and modal layout authority.

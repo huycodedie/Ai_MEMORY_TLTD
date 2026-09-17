@@ -10,13 +10,13 @@
 ## Current milestone state
 - `UI-02 = LOCKED` as of `2026-09-17`.
 - `UI-POLISH-01 Phase A = AUDIT COMPLETE`.
-- `UI-POLISH-01 = RESPONSIVE LAYOUT DESIGN REQUIRED / NOT LOCKED`.
-- `UI-POLISH-01 Responsive Layout = DRAFT READY FOR PROJECT OWNER REVIEW / NOT LOCKED`.
+- `UI-POLISH-01 Responsive Layout = LOCKED / PROJECT OWNER APPROVED` as of `2026-09-17`.
+- `UI-POLISH-01 overall = NOT LOCKED`.
 - `UI-POLISH-01 Phase B1 = LOCAL IMPLEMENTATION REPORTED / NOT ACCEPTED / VERIFICATION PENDING`.
 - `P08 = NOT STARTED`.
 
 ## Current active objective
-Review and approve/revise the responsive portrait UI layout draft before broad Unity UI implementation.
+Perform read-only actual-source inspection of the reported local Phase B1 implementation and prepare a bounded reconciliation plan against the locked responsive layout.
 
 `1080x1920` is the reference coordinate system only. The design must support common portrait phones, tall screens, portrait tablets, notches and gesture/home-indicator Safe Areas.
 
@@ -39,9 +39,9 @@ Create and review a responsive UI layout specification/wireframe covering at min
 
 Do not allow the implementation executor to invent screen composition while writing code.
 
-Draft prepared: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`. It defines root hierarchy, Safe Area ownership, responsive classes, global shell zones, combat/system layout, modal geometry and B1 reconciliation gates. Project Owner approval is required before it becomes locked authority.
+Locked authority: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`. It defines root hierarchy, Safe Area ownership, responsive classes, global shell zones, combat/system layout, modal geometry and B1 reconciliation gates.
 
-An out-of-sequence local Phase B1 implementation has been reported. Freeze further Phase B edits, preserve the local files for inspection, and do not promote the report's `IMPLEMENTED / VERIFICATION PASS` claim into canonical status. The responsive layout/wireframe remains the next deliverable. After layout approval, inspect and reconcile the B1 implementation before rerunning verification.
+An out-of-sequence local Phase B1 implementation has been reported. Freeze further Phase B edits, preserve the local files for inspection, and do not promote the report's `IMPLEMENTED / VERIFICATION PASS` claim into canonical status. Inspect the actual B1 source and raw evidence, then define exact reconciliation changes before authorizing any further Unity edit.
 
 ## Visual reference
 Project Owner-approved layout/visual reference:
@@ -79,6 +79,6 @@ Functional layout, anchoring, Safe Area support, scrolling, input blocking and m
 - GitHub `main`: persistent canonical memory source.
 
 ## Known blockers
-- None for responsive layout design.
-- Further Unity Phase B implementation remains blocked until the layout specification/wireframe is reviewed.
-- Phase B1 acceptance is blocked on actual-source inspection, raw evidence review and reconciliation with the approved responsive layout.
+- No remaining blocker for responsive layout authority; it is locked.
+- Further Unity edits remain blocked until B1 actual-source inspection produces an approved reconciliation scope.
+- Phase B1 acceptance is blocked on actual-source inspection, raw evidence review, responsive reconciliation and rerun verification.

@@ -1,9 +1,10 @@
 # UI-POLISH-01 — RESPONSIVE PORTRAIT LAYOUT SPECIFICATION
 
 ## Status
-`DRAFT FOR PROJECT OWNER REVIEW — NOT LOCKED — NO IMPLEMENTATION AUTHORIZATION`
+`LOCKED — PROJECT OWNER APPROVED RESPONSIVE LAYOUT AUTHORITY`
 
 Draft date: `2026-09-17`.
+Approval/lock date: `2026-09-17`.
 
 This specification defines structure, responsive behavior and input-safe layout only. Final color, decorative frames, icon art, animation, tweening, transitions and Unity `Animator` work remain deferred until runtime stability.
 
@@ -187,4 +188,4 @@ The layout can be locked only when:
 
 ## 13. Current decision boundary
 
-This document is a review draft. It does not accept the local Phase B1 implementation, authorize Phase B2/B3/B4, or mark UI-POLISH-01 as PASS/LOCKED.
+This responsive layout specification is locked and must govern subsequent UI structural work. Its approval does not accept the existing local Phase B1 implementation, authorize Phase B2/B3/B4, or mark UI-POLISH-01 as PASS/LOCKED. Phase B1 must first undergo actual-source inspection and controlled reconciliation against this authority.
