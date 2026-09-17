@@ -3,6 +3,8 @@
 ## Purpose
 This file is the quick-reference authority for the **current** design state. It does not erase historical D documents. Historical rules remain traceable through `D1_D23_LOCKED.md`, amendment files, and `DESIGN_CHANGELOG.md`.
 
+Continuity and publication are governed by `PROJECT_MEMORY/CONTINUITY_AND_SYNC_AUTHORITY.md`. The exact active task and next step are recorded in `PROJECT_MEMORY/ACTIVE_WORK_HANDOFF.md`.
+
 ## Authority order
 1. Original user-approved D1-D23 decisions.
 2. Later explicit user-approved amendments/revisions that supersede an older rule.
@@ -127,4 +129,4 @@ P01+ tested-and-accepted behavior may supersede an older historical design rule.
 All execution/visual/regression numbers stated above come from user-provided project reports unless independently executed in the current chat. Never convert a report claim into independent verification.
 
 ## Continuation handoff
-For the full current-chat package, read `PROJECT_MEMORY/CHAT_HANDOFF_2026-09-16.md`.
+For current continuation, read `PROJECT_MEMORY/ACTIVE_WORK_HANDOFF.md` first. Use `PROJECT_MEMORY/CHAT_HANDOFF_2026-09-16.md` only as historical detailed context where still applicable.

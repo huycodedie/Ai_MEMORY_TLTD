@@ -4,7 +4,7 @@
 
 This directory is the AI-readable local memory package for the Unity project `E:\code\TLTD`.
 
-The repository `huycodedie/Ai_MEMORY_TLTD` is the long-term backup. Google Antigravity should consume a LOCAL copy inside the TLTD project.
+The repository `huycodedie/Ai_MEMORY_TLTD` branch `main` is the persistent canonical memory source. Google Antigravity should synchronize and consume a LOCAL copy inside the TLTD project.
 
 ## First-time installation into TLTD
 
@@ -21,6 +21,19 @@ After a new design decision is explicitly LOCKED:
 3. Antigravity reads local files before implementation.
 4. Code and tests are then updated.
 5. Acceptance evidence is recorded before the milestone is marked LOCKED.
+
+Every approved decision must also follow `CONTINUITY_AND_SYNC_AUTHORITY.md`: update the active handoff, commit, push and verify the remote state. Conversation history alone is not durable project memory.
+
+## Mandatory continuation entrypoint
+
+For a new chat, changed workspace or resumed task, read in this order:
+
+1. `AI_RULES.md`
+2. `CONTINUITY_AND_SYNC_AUTHORITY.md`
+3. `ACTIVE_WORK_HANDOFF.md`
+4. `CURRENT_DESIGN_AUTHORITY.md`
+5. `DESIGN_CHANGELOG.md`
+6. Authority and evidence files referenced by the active handoff
 
 ## Do not treat this folder as gameplay code
 

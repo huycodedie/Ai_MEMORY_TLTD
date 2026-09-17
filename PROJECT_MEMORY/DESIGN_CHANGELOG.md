@@ -103,5 +103,15 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - Full authority: `PROJECT_MEMORY/UI_RESPONSIVE_LAYOUT_AUTHORITY.md`.
 - Status: `LOCKED — RESPONSIVE LAYOUT DIRECTION` as of 2026-09-17.
 
+### Persistent continuity and Git synchronization
+- The Project Owner requires every approved project decision to be committed, pushed and verified in the memory repository so work can continue across new chats and changed workspaces without losing context.
+- ChatGPT/Codex is the primary coordinator, Tech Lead/design authority and memory publisher.
+- Antigravity is the secondary Unity implementation/test executor and may not independently redefine locked authority.
+- GitHub `huycodedie/Ai_MEMORY_TLTD` branch `main` is the persistent canonical memory source.
+- `ACTIVE_WORK_HANDOFF.md` records the exact current state and next authorized action; it must be updated whenever accepted work changes the continuation point.
+- A local-only commit or unpushed conversation decision is not considered durably synchronized.
+- Full policy: `PROJECT_MEMORY/CONTINUITY_AND_SYNC_AUTHORITY.md`.
+- Status: `LOCKED — CONTINUITY AND GIT SYNC POLICY` as of 2026-09-17.
+
 ## Future revision rule
 Every new gameplay or UI change must record: old rule -> evidence/reason -> new rule -> status -> affected milestone/code -> tests required. Never delete historical decisions to hide a conflict.
