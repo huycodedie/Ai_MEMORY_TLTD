@@ -16,9 +16,11 @@
 - `P08 = NOT STARTED`.
 
 ## Current active objective
-Perform read-only actual-source inspection of the reported local Phase B1 implementation and prepare a bounded reconciliation plan against the locked responsive layout.
+Complete Tech Lead source verification by attaching the B1 review package and supplying the missing read-only excerpts. No correction plan or Unity edit is authorized yet.
 
 Authorized executor task: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REVIEW_TASK.md`. Antigravity may inspect and export evidence only; it may not edit Unity or memory files, rerun tests, commit or push.
+
+The first source report was received but is blocked by an invalid claimed remote SHA, missing required excerpts/search results and unsupported conclusions. Review decision: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REPORT_REVIEW.md`.
 
 `1080x1920` is the reference coordinate system only. The design must support common portrait phones, tall screens, portrait tablets, notches and gesture/home-indicator Safe Areas.
 
@@ -74,7 +76,8 @@ Functional layout, anchoring, Safe Area support, scrolling, input blocking and m
 7. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`
 8. `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`
 9. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REVIEW_TASK.md`
-10. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
+10. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REPORT_REVIEW.md`
+11. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
 
 ## Role model
 - ChatGPT/Codex: primary coordinator, Tech Lead, design authority and memory publisher.
@@ -85,3 +88,4 @@ Functional layout, anchoring, Safe Area support, scrolling, input blocking and m
 - No remaining blocker for responsive layout authority; it is locked.
 - Further Unity edits remain blocked until B1 actual-source inspection produces an approved reconciliation scope.
 - Phase B1 acceptance is blocked on actual-source inspection, raw evidence review, responsive reconciliation and rerun verification.
+- Immediate evidence blocker: attach `review_package_b1.zip` with SHA-256 `7FE7C13798A2FF005B891E422C0AC5866EC72D0146B10A72E10BA8D8F4BA446D` and supply the required report supplement.
