@@ -93,5 +93,15 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - This corrects the “0 warnings” summary accidentally written in commit 2ca6169 metadata/current milestone summary.
 - Warning correction does not affect the UI-02 LOCK decision.
 
+### Responsive portrait layout and deferred visual animation
+- The Project Owner clarified that `1080x1920` is a reference coordinate system, not the only supported screen size.
+- TLTD UI must support common portrait phones, tall screens, portrait tablets and Safe Area obstructions through anchors, flexible regions, bounded modal geometry and scrolling where required.
+- The immediate objective is responsive screen composition and information-layout design, followed by structural implementation and runtime/regression stabilization.
+- Final visual polish, decorative art, transitions, tweening and Unity `Animator` work are deferred until the game is stable and the responsive layout is accepted.
+- The supplied `Giang Hồ Trong Tay` Google Drive screenshot collection is approved as a visual/layout reference only; it does not create gameplay authority.
+- Phase B implementation must not begin by allowing an implementation agent to invent screen composition. A responsive layout specification/wireframe must be reviewed first.
+- Full authority: `PROJECT_MEMORY/UI_RESPONSIVE_LAYOUT_AUTHORITY.md`.
+- Status: `LOCKED — RESPONSIVE LAYOUT DIRECTION` as of 2026-09-17.
+
 ## Future revision rule
 Every new gameplay or UI change must record: old rule -> evidence/reason -> new rule -> status -> affected milestone/code -> tests required. Never delete historical decisions to hide a conflict.

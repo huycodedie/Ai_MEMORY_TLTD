@@ -71,7 +71,8 @@ If a conflict cannot be proven as superseded: STOP and report it. Never guess.
 - Major systems replace the Main Content Area above the navigation; they do not create a second navigation framework.
 - **Công Pháp is a dedicated system screen/module**, not another tab inside a generic all-purpose function panel.
 - Công Pháp may contain its own overview, category list, and detail sub-screens while retaining the global 5-position navigation shell.
-- Exact navigation labels/icons, portrait resolution, pixel layout, visual art and detailed interaction remain TBD unless separately approved.
+- `1080x1920` is the approved reference coordinate system, not a fixed single-device target. Responsive portrait layout, Safe Area handling, phone/tablet aspect coverage and the required layout-first implementation order are locked in `PROJECT_MEMORY/UI_RESPONSIVE_LAYOUT_AUTHORITY.md`.
+- Exact navigation labels/icons, final per-screen geometry, final visual art and detailed interaction remain TBD until the responsive layout specification is reviewed.
 - Full structural rules are recorded in `PROJECT_MEMORY/UI_DESIGN_AUTHORITY.md`.
 
 ## P07.8 status
@@ -111,9 +112,13 @@ Implementation has **NOT STARTED**.
 - Implementation plan: Phased plan defined (Phase B1: Modal Exclusivity & Queue; Phase B2: Pending Payload Safety; Phase B3: Typography & Touch Targets; Phase B4: Damage Popup Lifecycle & Pooling).
 - Test matrix: 15 dedicated verification scenarios established.
 - Audit report: Complete documentation recorded in `PROJECT_MEMORY/UI-POLISH-01_ARCHITECTURE_AUDIT.md`.
-- Status rule: UI-POLISH-01 is NOT locked and NOT declared PASS. Implementation will begin in Phase B.
+- Project Owner sequencing decision: responsive layout/wireframes must be designed and approved before Phase B implementation. The implementation agent must not invent screen composition while coding.
+- Current scope is structural layout and functional stability. Final colors, decorative frames, icon art, visual polish, transitions and Unity `Animator` work are deferred until the game is stable and relevant verification passes.
+- Visual reference: the Project Owner's `Giang Hồ Trong Tay` screenshot collection in Google Drive guides layout/composition only and does not supersede gameplay authority.
+- Responsive rule: `1080x1920` is the reference coordinate system; common portrait phones, tall screens, tablets and Safe Area obstructions must be supported.
+- Status rule: UI-POLISH-01 is NOT locked and NOT declared PASS. Responsive layout design is the required next deliverable; implementation remains NOT STARTED.
 
-*Milestone status: UI-02 remains LOCKED. UI-POLISH-01 = AUDIT COMPLETE / IMPLEMENTATION NOT STARTED. P08 remains NOT STARTED.*
+*Milestone status: UI-02 remains LOCKED. UI-POLISH-01 = AUDIT COMPLETE / RESPONSIVE LAYOUT DESIGN REQUIRED / IMPLEMENTATION NOT STARTED. P08 remains NOT STARTED.*
 
 ## Implementation rule
 P01+ tested-and-accepted behavior may supersede an older historical design rule. Record the change; do not silently overwrite history.

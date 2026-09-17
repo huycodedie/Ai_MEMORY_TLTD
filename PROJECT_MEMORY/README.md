@@ -27,3 +27,11 @@ After a new design decision is explicitly LOCKED:
 This directory is a contract/memory layer. It does not itself prove that the Unity implementation is correct.
 
 Implementation evidence must come from the actual project, tests, Unity Play Mode, regression logs, and visual checks where applicable.
+
+## Current UI layout authority
+
+Before implementing new UI layout work, read:
+
+- `UI_DESIGN_AUTHORITY.md` — global shell and system-screen structure.
+- `UI_RESPONSIVE_LAYOUT_AUTHORITY.md` — responsive portrait rules, Safe Area coverage, reference-resolution meaning, visual-reference boundary and the required layout-first implementation order.
+- `UI-POLISH-01_ARCHITECTURE_AUDIT.md` — current modal/lifecycle architecture findings.
