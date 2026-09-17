@@ -18,6 +18,8 @@
 ## Current active objective
 Perform read-only actual-source inspection of the reported local Phase B1 implementation and prepare a bounded reconciliation plan against the locked responsive layout.
 
+Authorized executor task: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REVIEW_TASK.md`. Antigravity may inspect and export evidence only; it may not edit Unity or memory files, rerun tests, commit or push.
+
 `1080x1920` is the reference coordinate system only. The design must support common portrait phones, tall screens, portrait tablets, notches and gesture/home-indicator Safe Areas.
 
 ## Required next deliverable
@@ -71,7 +73,8 @@ Functional layout, anchoring, Safe Area support, scrolling, input blocking and m
 6. `PROJECT_MEMORY/UI-POLISH-01_ARCHITECTURE_AUDIT.md`
 7. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`
 8. `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`
-9. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
+9. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REVIEW_TASK.md`
+10. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
 
 ## Role model
 - ChatGPT/Codex: primary coordinator, Tech Lead, design authority and memory publisher.
