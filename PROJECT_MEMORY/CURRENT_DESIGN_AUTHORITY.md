@@ -119,6 +119,7 @@ An executor report states that a local Phase B1 implementation now exists in `E:
 - Visual reference: the Project Owner's `Giang Hồ Trong Tay` screenshot collection in Google Drive guides layout/composition only and does not supersede gameplay authority.
 - Responsive rule: `1080x1920` is the reference coordinate system; common portrait phones, tall screens, tablets and Safe Area obstructions must be supported.
 - Phase B1 Tech Lead review: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`.
+- Responsive layout draft for Project Owner review: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`. The draft is not locked and does not authorize implementation.
 - Status rule: UI-POLISH-01 is NOT locked and NOT declared PASS. Responsive layout design remains the required next deliverable. The reported local B1 implementation is quarantined for later inspection and layout reconciliation.
 
 *Milestone status: UI-02 remains LOCKED. UI-POLISH-01 = AUDIT COMPLETE / RESPONSIVE LAYOUT DESIGN REQUIRED / B1 LOCAL IMPLEMENTATION REPORTED BUT NOT ACCEPTED / NOT LOCKED. P08 remains NOT STARTED.*

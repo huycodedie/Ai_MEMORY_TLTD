@@ -11,11 +11,12 @@
 - `UI-02 = LOCKED` as of `2026-09-17`.
 - `UI-POLISH-01 Phase A = AUDIT COMPLETE`.
 - `UI-POLISH-01 = RESPONSIVE LAYOUT DESIGN REQUIRED / NOT LOCKED`.
+- `UI-POLISH-01 Responsive Layout = DRAFT READY FOR PROJECT OWNER REVIEW / NOT LOCKED`.
 - `UI-POLISH-01 Phase B1 = LOCAL IMPLEMENTATION REPORTED / NOT ACCEPTED / VERIFICATION PENDING`.
 - `P08 = NOT STARTED`.
 
 ## Current active objective
-Design the responsive portrait UI layout and information hierarchy before broad Unity UI implementation.
+Review and approve/revise the responsive portrait UI layout draft before broad Unity UI implementation.
 
 `1080x1920` is the reference coordinate system only. The design must support common portrait phones, tall screens, portrait tablets, notches and gesture/home-indicator Safe Areas.
 
@@ -37,6 +38,8 @@ Create and review a responsive UI layout specification/wireframe covering at min
 - Tablet width constraints and Safe Area behavior.
 
 Do not allow the implementation executor to invent screen composition while writing code.
+
+Draft prepared: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`. It defines root hierarchy, Safe Area ownership, responsive classes, global shell zones, combat/system layout, modal geometry and B1 reconciliation gates. Project Owner approval is required before it becomes locked authority.
 
 An out-of-sequence local Phase B1 implementation has been reported. Freeze further Phase B edits, preserve the local files for inspection, and do not promote the report's `IMPLEMENTED / VERIFICATION PASS` claim into canonical status. The responsive layout/wireframe remains the next deliverable. After layout approval, inspect and reconcile the B1 implementation before rerunning verification.
 
@@ -67,7 +70,8 @@ Functional layout, anchoring, Safe Area support, scrolling, input blocking and m
 5. `PROJECT_MEMORY/UI_RESPONSIVE_LAYOUT_AUTHORITY.md`
 6. `PROJECT_MEMORY/UI-POLISH-01_ARCHITECTURE_AUDIT.md`
 7. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`
-8. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
+8. `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`
+9. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
 
 ## Role model
 - ChatGPT/Codex: primary coordinator, Tech Lead, design authority and memory publisher.
