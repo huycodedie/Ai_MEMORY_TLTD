@@ -87,8 +87,8 @@ Purpose: preserve why locked decisions changed without destroying historical sou
 - The user-approved remediation set spawned Monster Y to -0.3, serialized the same spawn plane in `Prototype01SceneBuilder`, and aligned Attack distance with the Movement horizontal-plane model (`delta.y=0`).
 - Spawned Monster visual initialization was also unified with the standard `UIProceduralTextureFactory.GetMonsterStandeeSprite()` pipeline and the legacy 3D `MONSTER` label was removed.
 - Reported validation: dedicated 12/12, Play Mode scenarios A-L, cumulative regressions 125/125, compile 0 errors/0 warnings.
-- This is recorded as `PASS / REMEDIATED` for the UI-02 runtime combat-height sub-milestone; it does **not** globally lock UI-02.
-- Full session package: `PROJECT_MEMORY/CHAT_HANDOFF_2026-09-16.md`.
+- Real Play Mode runtime timing verification confirmed 3/3 consecutive encounters with zero deadlock. Full regression: 137/137 PASS. Visual Acceptance: 4/4 mandatory screenshots (1080x1920) VERIFIED PASS.
+- Status: `LOCKED` as of 2026-09-17 (Project Owner acceptance + Tech Lead approval).
 
 ## Future revision rule
 Every new gameplay or UI change must record: old rule -> evidence/reason -> new rule -> status -> affected milestone/code -> tests required. Never delete historical decisions to hide a conflict.

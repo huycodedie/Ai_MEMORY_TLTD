@@ -84,35 +84,23 @@ P07.9 Advanced Skill Casting is **LOCKED** according to the user's final accepta
 P07.9.1 Hero Autonomous Skill Decision & Auto Combat is **LOCKED** according to the user's final audit/execution report. Locked behavior includes data-driven normal-skill priority, Auto ON autonomous normal skills, Auto OFF disabling autonomous skill/ultimate decisions while Basic Attack remains active, Ultimate RageCost read from `SkillDefinitionSO.RageCost`, Rage mutation remaining in the existing authority, and Basic Attack blocked during active Cast/Channel. Reported validation: dedicated 16/16, P07.8 55/55, P07.9 Phase5.3 36/36, P07.9 Risk04 18/18, historical Master P01-P07.8 PASS, compile 0 errors/0 warnings, runtime scenarios A-E PASS. Full baseline is in `PROJECT_MEMORY/P07_9_1_LOCKED.md`.
 
 ## UI-02 status
-Global UI-02 is **NOT LOCKED**.
+Global UI-02 is **LOCKED** as of 2026-09-17 (Project Owner acceptance + Tech Lead approval).
 
-### UI-02 runtime combat height remediation
-The user-provided 2026-09-16 remediation report confirms a runtime deadlock caused by:
-1. legacy `BattleManager.monsterSpawnPosition` Y=-1.2 versus the active Prototype01 combat plane Y=-0.3; and
-2. Movement using horizontal distance while Attack previously used full `Vector3.Distance`.
-
-Current remediation baseline:
+### UI-02 runtime combat height remediation & visual acceptance
+The runtime deadlock caused by Y-axis discrepancy ($Y = -1.2\text{m}$ vs $Y = -0.3\text{m}$) and 3D Euclidean distance evaluation in AttackComponent has been completely remediated, verified by telemetry, regression tested (137/137 PASS), and visually accepted:
 - Monster spawn Y = -0.3.
-- `Prototype01SceneBuilder` serializes the same spawn Y.
+- `Prototype01SceneBuilder` serializes the same spawn Y into `Assets/_Game/Scenes/Prototype01.unity`.
 - `AttackComponent` uses the same horizontal combat-plane distance model as `MovementComponent` (`delta.y = 0`, then magnitude).
-- Spawned monsters reuse `UIProceduralTextureFactory.GetMonsterStandeeSprite()`, scale `(1.1,1.1,1)`, sorting order 10, `flipX=true`, with legacy 3D `MONSTER` label removed.
-- Dedicated validation reported 12/12 PASS.
-- Multi-encounter Play Mode scenarios A-L reported PASS.
-- Regression reported: 125/125 across P07.8, P07.9 Phase5.3, P07.9 Risk04, P07.9.1.
-- Compile reported 0 errors/0 warnings.
-- Locked P07.8/P07.9/P07.9.1 gameplay authorities were reported untouched.
+- Spawned monsters reuse `UIProceduralTextureFactory.GetMonsterStandeeSprite()`, scale `(1.1,1.1,1)`, sorting order 10, `flipX=true`, with legacy 3D `MONSTER` label and unstyled white boxes removed.
+- Dedicated validation: 12/12 PASS.
+- Play Mode real runtime timing verification: 3/3 consecutive encounters completed by `MonsterDeath` with zero deadlock observed.
+- Full regression: 137/137 PASS across all 5 test suites (UI-02 Height Fix 12, P07.8 55, P07.9 Phase5.3 36, P07.9 Risk04 18, P07.9.1 16).
+- Visual Acceptance: 4/4 mandatory 1080x1920 reference portrait screenshots VERIFIED PASS (`UI02_VISUAL_01_Encounter1Combat.png` to `UI02_VISUAL_04_Encounter3Combat.png`).
+- Compile: 0 errors / 0 warnings.
+- Locked P07.8/P07.9/P07.9.1 and D1-D23 gameplay authorities remain untouched.
+- Non-blocking presentation debt (modal coordination, damage popup styling, font scaling) is explicitly deferred to `UI-POLISH-01`.
 
-Treat this as `PASS / REMEDIATED` based on user-provided evidence, not as global UI-02 LOCK.
-Do not revert this Y-axis fix and do not replace it with a fake range-tolerance workaround.
-
-### UI-02 next step
-The immediate next task is a **test-only Combat Runtime Timing Monitor** before further UI-02 presentation work.
-Suggested instrumentation/report:
-- `Assets/_Game/Editor/Prototype01CombatRuntimeTimingMonitor.cs`
-- `PROJECT_MEMORY/UI-02_COMBAT_RUNTIME_TIMING_REPORT.md`
-
-The monitor should observe real runtime timing for Encounter 1 -> 2 -> 3 (and 4 if possible), including spawn, movement, range entry, first attack, damage, death, next spawn, positions, DeltaX/DeltaY, horizontal distance, full 3D distance, attack threshold, available timers, `Time.realtimeSinceStartup`, `Time.time`, and `Time.timeScale`.
-It must not teleport entities, manually attack, fake timing with sleeps, alter gameplay authority, or add a second combat/timing authority. If an API is unavailable, report it rather than modifying gameplay code merely to expose it.
+*Status: Milestone UI-02 is LOCKED. P08 and UI-POLISH-01 have NOT yet started.*
 
 ## Implementation rule
 P01+ tested-and-accepted behavior may supersede an older historical design rule. Record the change; do not silently overwrite history.

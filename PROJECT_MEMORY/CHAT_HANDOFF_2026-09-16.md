@@ -442,7 +442,7 @@ P07.9.1                   = LOCKED
 
 UI structural baseline    = LOCKED
 UI-01 Foundation         = PASS / implemented
-UI-02 global             = NOT LOCKED
+UI-02 global             = LOCKED (as of 2026-09-17)
 
 Combat Y-axis deadlock   = ROOT CAUSE CONFIRMED
 Y-axis remediation       = PASS / current baseline
@@ -452,15 +452,15 @@ Multi-encounter PlayMode = PASS (reported)
 Compile                  = 0 errors / 0 warnings (reported)
 
 NEXT:
-Combat Runtime Timing Monitor
+Combat Runtime Timing Monitor (COMPLETED)
         ↓
-UI-02 Combat HUD visual work
+UI-02 Combat HUD visual work (COMPLETED)
         ↓
-UI-02 visual/runtime acceptance
+UI-02 visual/runtime acceptance (VERIFIED PASS)
         ↓
-UI-02 LOCK
+UI-02 LOCK (COMPLETED 2026-09-17)
         ↓
-P08
+P08 / UI-POLISH-01 (Not started)
 ```
 
 ## 17. EVIDENCE QUALIFIER
