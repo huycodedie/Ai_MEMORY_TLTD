@@ -1,78 +1,50 @@
 # ACTIVE WORK HANDOFF — TLTD
 
-## Synchronization state
-- Last updated: `2026-09-17`.
-- Memory repository: `huycodedie/Ai_MEMORY_TLTD`.
-- Branch: `main`.
-- Authority base verified before this handoff update: `fd5b3e57720649f2e62973dec46aef0b627d9972` — `docs(ui-polish-01): record b1 review gate`.
-- The latest remote commit must always be verified after publication; a handoff file cannot embed the SHA of the commit that contains itself.
+Last decision update: 2026-09-26 (Asia/Ho_Chi_Minh).
+Canonical memory: huycodedie/Ai_MEMORY_TLTD, branch main.
+Publication base: 1f2644e6092aaf309a5512c83d9aa265d170770d.
+Source remote observed: huycodedie/ta_la_ta_de at ff4fcec7fda4f6390b1212300249554a89ef4e3d.
+A file cannot embed the SHA of its own publishing commit; resolve current remote main when synchronizing.
 
-## Current milestone state
-- `UI-02 = LOCKED` as of `2026-09-17`.
-- `UI-POLISH-01 Phase A = AUDIT COMPLETE`.
-- `UI-POLISH-01 Responsive Layout = LOCKED / PROJECT OWNER APPROVED` as of `2026-09-17`.
-- `UI-POLISH-01 overall = NOT LOCKED`.
-- `UI-POLISH-01 Phase B1 = LOCAL IMPLEMENTATION REPORTED / NOT ACCEPTED / VERIFICATION PENDING`.
-- `P08 = NOT STARTED`.
+## Current decisions
 
-## Current active objective
-Complete Tech Lead source verification by attaching the B1 review package and supplying the missing read-only excerpts. No correction plan or Unity edit is authorized yet.
+- **P08 = ACCEPTED / LOCKED** after the Project Owner confirmed all final acceptance conditions in interactive Unity on 2026-09-26.
+- Accepted P08 scope: 4-5 normal monsters per wave, once-per-completed-wave HP/ATK/DEF x1.01 growth, AOE, independent channel snapshots/natural completion, full-wave ownership and sequential loot.
+- UI-02, P07.8, P07.9 and P07.9.1 stay locked. UI-POLISH-01 B1 is the preserved baseline used during P08; this does not accept unfinished UI phases.
+- **Gameplay functionality first; complete UI/polish later.** The earlier suggestion to do typography/popup polish next is superseded by the Project Owner's current instruction.
+- P08 does not need another audit/test/package cycle just to record its acceptance.
 
-Authorized executor task: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REVIEW_TASK.md`. Antigravity may inspect and export evidence only; it may not edit Unity or memory files, rerun tests, commit or push.
+## Active workstream
 
-The first source report was received but is blocked by an invalid claimed remote SHA, missing required excerpts/search results and unsupported conclusions. Review decision: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REPORT_REVIEW.md`.
+**P09-A — Projectile Foundation.**
+Implementation task and boundaries: P09_PROJECTILE_FOUNDATION_TASK.md.
+Current status: source entry points inspected; local implementation/testing not yet performed.
+Next concrete action: Antigravity synchronizes this memory, preserves and records the tested working-tree baseline, reconciles the projectile insertion points locally, and implements the bounded single-target projectile slice through the existing skill/damage pipeline.
+Dash/movement abilities follow in a later slice; final UI work remains deferred.
 
-`1080x1920` is the reference coordinate system only. The design must support common portrait phones, tall screens, portrait tablets, notches and gesture/home-indicator Safe Areas.
+## Evidence boundary
 
-## Required next deliverable
-1. Attach `review_package_b1.zip` to ChatGPT/Codex and verify SHA-256 `7FE7C13798A2FF005B891E422C0AC5866EC72D0146B10A72E10BA8D8F4BA446D`.
-2. Supply the read-only supplement required by `UI-POLISH-01_PHASE_B1_SOURCE_REPORT_REVIEW.md`.
-3. Tech Lead inspects actual source and produces a bounded correction plan.
-4. Only an explicit later authorization may permit Antigravity to edit Unity.
+- Final supplied P08 results: Gate 1 50/50, Gate 2 135/137 with exit 1, Gate 3 52/52, Gate 4 three natural waves with exit 0.
+- Known Gate 2 exceptions: UI02_CombatHeightFix 07 and 09 assume immediate advancement after one monster death. Record as accepted legacy-contract exceptions, never as raw PASS.
+- Project Owner manual acceptance closes the final channel + loot + modal + next-wave behavior.
+- Source/package provenance and full contract: P08_LOCKED.md.
+- Remote HEAD is not asserted to equal every byte of the local manually tested build. Record local source hashes at handoff without reopening P08.
 
-Locked authority: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`. It defines root hierarchy, Safe Area ownership, responsive classes, global shell zones, combat/system layout, modal geometry and B1 reconciliation gates.
+## Read next
 
-An out-of-sequence local Phase B1 implementation has been reported. Freeze further Phase B edits, preserve the local files for inspection, and do not promote the report's `IMPLEMENTED / VERIFICATION PASS` claim into canonical status. Inspect the actual B1 source and raw evidence, then define exact reconciliation changes before authorizing any further Unity edit.
+1. AI_RULES.md and CONTINUITY_AND_SYNC_AUTHORITY.md.
+2. CURRENT_DESIGN_AUTHORITY.md and P08_LOCKED.md.
+3. P09_PROJECTILE_FOUNDATION_TASK.md.
+4. D12_D14_LOCKED.md (D13 projectile/data authority), D1_D23_LOCKED.md and amendments.
+5. P07_9_LOCKED.md, P07_9_1_LOCKED.md and actual local source/tests.
 
-## Visual reference
-Project Owner-approved layout/visual reference:
+In the memory repository, some D documents are at repository root; in the game copy they are under PROJECT_MEMORY.
 
-`https://drive.google.com/drive/folders/1EtN2qgqELrRvmt5JAnacgRKz4TMQV8jY`
+## Execution constraints
 
-Use the sample `Giang Hồ Trong Tay` screens for layout/composition guidance only. They do not override TLTD gameplay authority.
-
-## Current exclusions
-Do not start the following before runtime stability and explicit later authorization:
-
-- Final visual polish.
-- Decorative frames and final color treatment.
-- Final icon art.
-- Presentation-only transitions or tweening.
-- Unity `Animator` work.
-- Decorative VFX.
-
-Functional layout, anchoring, Safe Area support, scrolling, input blocking and modal lifecycle remain required structural work.
-
-## Mandatory reading for continuation
-1. `PROJECT_MEMORY/AI_RULES.md`
-2. `PROJECT_MEMORY/CONTINUITY_AND_SYNC_AUTHORITY.md`
-3. `PROJECT_MEMORY/CURRENT_DESIGN_AUTHORITY.md`
-4. `PROJECT_MEMORY/UI_DESIGN_AUTHORITY.md`
-5. `PROJECT_MEMORY/UI_RESPONSIVE_LAYOUT_AUTHORITY.md`
-6. `PROJECT_MEMORY/UI-POLISH-01_ARCHITECTURE_AUDIT.md`
-7. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`
-8. `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md`
-9. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REVIEW_TASK.md`
-10. `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_SOURCE_REPORT_REVIEW.md`
-11. `PROJECT_MEMORY/DESIGN_CHANGELOG.md`
-
-## Role model
-- ChatGPT/Codex: primary coordinator, Tech Lead, design authority and memory publisher.
-- Antigravity: secondary Unity implementation/test executor.
-- GitHub `main`: persistent canonical memory source.
-
-## Known blockers
-- No remaining blocker for responsive layout authority; it is locked.
-- Further Unity edits remain blocked until B1 actual-source inspection produces an approved reconciliation scope.
-- Phase B1 acceptance is blocked on actual-source inspection, raw evidence review, responsive reconciliation and rerun verification.
-- Immediate evidence blocker: attach `review_package_b1.zip` with SHA-256 `7FE7C13798A2FF005B891E422C0AC5866EC72D0146B10A72E10BA8D8F4BA446D` and supply the required report supplement.
+- ChatGPT/Codex publishes accepted authority; Antigravity implements/tests within the scoped task.
+- The current commit/push authorization is for acceptance/direction documentation, including the game repository's memory mirror. It does not authorize publishing unseen source changes.
+- Preserve uncommitted Unity work. No reset, force-push or broad source refactor.
+- Existing gameplay authorities remain authoritative. New projectiles deliver through them.
+- UI changes are limited to essential functional/debug controls for the new feature; do not initiate finished UI design or polish.
+- Use bounded checks and direct owner testing when automation genuinely cannot exercise a path. Report what ran; do not manufacture PASS or repeat an unproductive loop.

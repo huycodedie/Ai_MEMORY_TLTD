@@ -1,5 +1,19 @@
 # CURRENT DESIGN AUTHORITY — TLTD
 
+## Current decision update — 2026-09-26
+
+**P08 = ACCEPTED / LOCKED**, closed by Project Owner direct Unity acceptance and Tech Lead decision. Full contract/evidence: [P08_LOCKED.md](P08_LOCKED.md).
+
+**Product priority: complete gameplay functionality first; complete UI and visual polish later.**
+The suggestion to start typography/damage-popup UI polish next is superseded. Preserve the functional B1 UI baseline used by P08; unfinished UI phases are deferred.
+
+Next active gameplay slice: **P09-A Projectile Foundation**, scoped in [P09_PROJECTILE_FOUNDATION_TASK.md](P09_PROJECTILE_FOUNDATION_TASK.md). Its implementation/testing/acceptance is pending; do not confuse a task assignment with a LOCK.
+
+P08 fixes the normal-wave contract at 4-5 monsters and once-per-completed-wave MaxHealth/Attack/Defense x1.01 growth. It includes AOE, per-execution channel snapshots/natural completion and sequential loot. Gate 2 remains 135/137, exit 1, with accepted legacy single-monster assumptions in UI02_HeightFix 07/09. Do not relabel them 137/137 PASS.
+
+This dated update supersedes older NOT STARTED / pending-review status and continuation instructions for P08 and the preserved B1 baseline. Historical entries remain evidence of their dates, not active tasks. UI-02 and P07.8/P07.9/P07.9.1 remain LOCKED.
+Read ACTIVE_WORK_HANDOFF.md for the exact current action.
+
 ## Purpose
 This file is the quick-reference authority for the **current** design state. It does not erase historical D documents. Historical rules remain traceable through `D1_D23_LOCKED.md`, amendment files, and `DESIGN_CHANGELOG.md`.
 
@@ -105,24 +119,13 @@ The runtime deadlock caused by Y-axis discrepancy ($Y = -1.2\text{m}$ vs $Y = -0
 
 *Status: Milestone UI-02 is LOCKED.*
 
-## UI-POLISH-01 status
-UI-POLISH-01 Phase A (Architecture Audit) is **AUDIT COMPLETE**.
-An executor report states that a local Phase B1 implementation now exists in `E:\code\TLTD`, but it was created before the required responsive-layout approval. It is **NOT ACCEPTED AS CANONICAL / VERIFICATION PENDING**. Preserve it for inspection; do not treat its reported test results as independent verification and do not continue Phase B code changes yet.
-- Scope audited: Modal coordination, full-screen input blocker / backdrop, mobile readability (1080x1920 reference portrait), floating combat text lifecycle, and listener lifecycle safety.
-- Root causes: 100% verified from code and visual evidence.
-- Proposed architecture: Non-intrusive `ModalCoordinator` with priority queuing, single exclusive blocking modal invariant, and full-screen `ModalBackdrop`. Zero modification to combat formulas, item stats, or `Time.timeScale`.
-- Implementation plan: Phased plan defined (Phase B1: Modal Exclusivity & Queue; Phase B2: Pending Payload Safety; Phase B3: Typography & Touch Targets; Phase B4: Damage Popup Lifecycle & Pooling).
-- Test matrix: 15 dedicated verification scenarios established.
-- Audit report: Complete documentation recorded in `PROJECT_MEMORY/UI-POLISH-01_ARCHITECTURE_AUDIT.md`.
-- Project Owner sequencing decision: responsive layout/wireframes must be designed and approved before Phase B implementation. The implementation agent must not invent screen composition while coding.
-- Current scope is structural layout and functional stability. Final colors, decorative frames, icon art, visual polish, transitions and Unity `Animator` work are deferred until the game is stable and relevant verification passes.
-- Visual reference: the Project Owner's `Giang Hồ Trong Tay` screenshot collection in Google Drive guides layout/composition only and does not supersede gameplay authority.
-- Responsive rule: `1080x1920` is the reference coordinate system; common portrait phones, tall screens, tablets and Safe Area obstructions must be supported.
-- Phase B1 Tech Lead review: `PROJECT_MEMORY/UI-POLISH-01_PHASE_B1_TECH_LEAD_REVIEW.md`.
-- Responsive layout authority: `PROJECT_MEMORY/UI-POLISH-01_RESPONSIVE_LAYOUT_SPEC.md` is **LOCKED / PROJECT OWNER APPROVED** as of 2026-09-17.
-- Status rule: UI-POLISH-01 is NOT locked and NOT declared PASS. The required next action is actual-source inspection of the reported local B1 implementation, followed by a controlled reconciliation plan against the locked responsive layout. Phase B2/B3/B4 remain unauthorized.
+## UI-POLISH-01 status — updated 2026-09-26
 
-*Milestone status: UI-02 remains LOCKED. UI-POLISH-01 Responsive Layout = LOCKED. UI-POLISH-01 B1 = LOCAL IMPLEMENTATION REPORTED / SOURCE REVIEW REQUIRED / NOT ACCEPTED. UI-POLISH-01 overall = NOT LOCKED. P08 remains NOT STARTED.*
+- UI-02 and the responsive layout authority stay LOCKED.
+- B1 is the preserved locked UI baseline used during accepted P08. The 2026-09-17 B1 review documents are historical; do not restart their old active task.
+- Full UI-POLISH-01 is not declared complete. Further typography, visual layout polish, decorative assets, popup styling, transitions and Animator work are deferred by the Project Owner until game functionality is complete.
+- Minimal functional/debug controls needed to exercise a newly scoped gameplay feature remain permissible within that feature's boundary.
+- The accepted P08 gameplay/loot contract is preserved.
 
 ## Implementation rule
 P01+ tested-and-accepted behavior may supersede an older historical design rule. Record the change; do not silently overwrite history.
